@@ -12,6 +12,7 @@
   },
   "rules": {
     "prettier/prettier": "error",
+    "class-methods-use-this": "off",
     "lines-between-class-members": [
       "error",
       "always",
