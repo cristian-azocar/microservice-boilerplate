@@ -10,7 +10,7 @@ export default class HealthService {
       uptime: process.uptime(),
       environment: process.env.NODE_ENV,
       appPackage: process.env.npm_package_name,
-      appVersionPackage: process.env.npm_package_version
+      appVersionPackage: process.env.npm_package_version,
     };
   }
 }

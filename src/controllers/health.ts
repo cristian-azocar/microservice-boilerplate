@@ -1,6 +1,5 @@
-import HealthInfo from '../models/health';
-import HealthService from '../services/health';
 import { ParameterizedContext } from 'koa';
+import HealthService from '../services/health';
 
 export default class HealthController {
   healthService: HealthService = new HealthService();
