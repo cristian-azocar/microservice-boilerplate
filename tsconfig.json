@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "target": "es2018",
+      "forceConsistentCasingInFileNames": true,
+      "removeComments": true,
+      "noImplicitAny": true,
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "outDir": "dist"
+    },
+    "include": ["*/src/**/*.ts"],
+    "exclude": ["node_modules", ".vscode"]
+  }
+  
