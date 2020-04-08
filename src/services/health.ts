@@ -4,7 +4,7 @@ export default class HealthService {
   async getHealthInfo(): Promise<HealthInfo> {
     return {
       nodeVersion: process.version,
-      service: 'Demo OTT Microservice',
+      service: 'Boilerplate Microservice',
       memory: process.memoryUsage(),
       pid: process.pid,
       uptime: process.uptime(),
