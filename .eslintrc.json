@@ -13,6 +13,7 @@
   "rules": {
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
+    "@typescript-eslint/no-var-requires": 0,
     "lines-between-class-members": [
       "error",
       "always",
