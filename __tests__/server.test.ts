@@ -1,32 +1,48 @@
-import { Server } from 'http';
-import { AddressInfo } from 'net';
+import app from '../src/app';
 
 describe('server', (): void => {
-  beforeEach((): void => {
-    jest.resetModules();
+  const mockListen: jest.Mock = jest.fn();
+  const requireServer = (): void => {
+    jest.isolateModules(() => {
+      // eslint-disable-next-line global-require
+      require('../src/server');
+    });
+  };
+
+  app.listen = mockListen;
+
+  afterEach((): void => {
+    mockListen.mockReset();
   });
 
-  it('should start and shutdown the server', (): void => {
-    // eslint-disable-next-line global-require
-    const server: Server = require('../src/server').default;
-    server.close();
+  it('should start the server', (): void => {
+    requireServer();
+
+    expect(mockListen).toHaveBeenCalled();
   });
 
-  it('should run the server in a default port', (): void => {
-    delete process.env.PORT;
-    // eslint-disable-next-line global-require
-    const server: Server = require('../src/server').default;
-    const serverAddress: AddressInfo = server.address() as AddressInfo;
-    expect(serverAddress.port).toEqual(3000);
-    server.close();
+  it('should start the server in a default port', (): void => {
+    requireServer();
+
+    expect(mockListen).toHaveBeenCalled();
+    expect(mockListen.mock.calls[0][0]).toEqual(3000);
   });
 
-  it('should run the server in a specific port', (): void => {
+  it('should start the server in a specific port', (): void => {
     process.env.PORT = '3001';
-    // eslint-disable-next-line global-require
-    const server: Server = require('../src/server').default;
-    const serverAddress: AddressInfo = server.address() as AddressInfo;
-    expect(serverAddress.port).toEqual(3001);
-    server.close();
+
+    requireServer();
+
+    expect(mockListen).toHaveBeenCalled();
+    expect(mockListen.mock.calls[0][0]).toEqual(3001);
+  });
+
+  it('should not raise an error when listen callback is called', (): void => {
+    requireServer();
+
+    expect(mockListen).toHaveBeenCalled();
+    const listenCallback = mockListen.mock.calls[0][1];
+
+    expect(() => listenCallback()).not.toThrow();
   });
 });
