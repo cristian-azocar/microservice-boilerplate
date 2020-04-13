@@ -7,7 +7,12 @@
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "docker:build": "docker build -t microservice-boilerplate --target development .",
+    "docker:build-prod": "docker build -t microservice-boilerplate .",
+    "docker:run": "docker run -d -p 3000:3000 --name microservice-boilerplate microservice-boilerplate",
+    "docker:start": "docker start microservice-boilerplate",
+    "docker:stop": "docker stop microservice-boilerplate"
   },
   "keywords": [],
   "author": "",
