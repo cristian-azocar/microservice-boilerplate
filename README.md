@@ -3,7 +3,7 @@
 A simple microservice boilerplate using [Node.js](https://nodejs.org/), [Koa](https://koajs.com/), [Typescript](https://www.typescriptlang.org/) and other awesome tools.
 It's main purpose is to speed the development of new microservices by providing an already configured project, using the best tools and a scalable code structure.
 
-## What includes this boilerplate?
+## What is included in this boilerplate?
 
 - A microservice developed using Koa framework.
 - All code typed with Typescript.
