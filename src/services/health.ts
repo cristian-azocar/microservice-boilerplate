@@ -1,10 +1,11 @@
 import HealthInfo from '../models/health';
+import Settings from '../../settings';
 
 export default class HealthService {
   async getHealthInfo(): Promise<HealthInfo> {
     return {
       nodeVersion: process.version,
-      service: 'Microservice Boilerplate',
+      service: Settings.get('SERVICE_NAME'),
       memory: process.memoryUsage(),
       pid: process.pid,
       uptime: process.uptime(),
