@@ -185,3 +185,5 @@ docker run -d -p 3000:3000 my-microservice
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [EditorConfig](https://editorconfig.org/)
+- [Husky](https://github.com/typicode/husky)
+- [lint-staged](https://github.com/okonet/lint-staged)
