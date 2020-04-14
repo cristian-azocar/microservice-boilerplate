@@ -10,6 +10,8 @@ It's main purpose is to speed the development of new microservices by providing 
 - Hot-reload with [Nodemon](https://nodemon.io/).
 - Unit tests with [Jest](https://jestjs.io/) and [Supertest](http://visionmedia.github.io/superagent/).
 - Good and clean code practices using [ESLint](https://eslint.org/) (based on [Airbnb configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)), [Prettier](https://prettier.io/) and [EditorConfig](https://editorconfig.org/).
+- A pre-commit [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to prevent dirty code to reach your local and remote repository, using [Husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged).
+- The service configuration can be loaded from command line, environment variables or YAML files, thanks to [nconf](https://github.com/indexzero/nconf).
 - And all of this in a [Docker](https://www.docker.com/) container.
 
 ## Getting started
@@ -187,3 +189,4 @@ docker run -d -p 3000:3000 my-microservice
 - [EditorConfig](https://editorconfig.org/)
 - [Husky](https://github.com/typicode/husky)
 - [lint-staged](https://github.com/okonet/lint-staged)
+- [nconf](https://github.com/indexzero/nconf)
