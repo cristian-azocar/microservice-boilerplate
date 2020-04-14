@@ -144,7 +144,7 @@ docker image prune -f
 This will create an image with the code transpiled to plain Javascript and with only the needed dependencies.
 The production stage is the last one, so we don't have to specify the `--target` option.
 
-Now, you can upload the image to [Docker Hub](https://hub.docker.com/) and then download it on the server from the repository
+Now, you can upload the image to [Docker Hub](https://hub.docker.com/) and then download it on your server from the repository
 
 ```
 # 1. Run this command on your local machine
