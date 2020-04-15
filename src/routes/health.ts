@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import { Middleware } from 'koa';
-import HealthController from '../controllers/health';
+import HealthController from 'src/controllers/health';
 
 export default class HealthRouter {
   router: Router = new Router();

@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import HealthService from '../services/health';
+import HealthService from 'src/services/health';
 
 export default class HealthController {
   healthService: HealthService = new HealthService();

@@ -1,5 +1,5 @@
-import HealthInfo from '../models/health';
-import Settings from '../../settings';
+import HealthInfo from 'src/models/health';
+import Settings from 'settings';
 
 export default class HealthService {
   async getHealthInfo(): Promise<HealthInfo> {

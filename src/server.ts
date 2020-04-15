@@ -1,4 +1,5 @@
-import app from './app';
+import 'app-module-path/register';
+import app from 'src/app';
 
 const port: number = +process.env.PORT || 3000;
 
