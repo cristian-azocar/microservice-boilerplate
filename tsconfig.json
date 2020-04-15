@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "module": "commonjs",
     "esModuleInterop": true,
     "resolveJsonModule": true,
@@ -9,7 +10,10 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "*": ["*", "src/*"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", ".vscode"]
