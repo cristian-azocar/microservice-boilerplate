@@ -17,7 +17,7 @@ nconf.file({
 });
 
 // Default file have the least priority
-nconf.file('MY_APP', {
+nconf.file({
   file: path.join(__dirname, 'default.yml'),
   format: {
     parse: yaml.safeLoad,
