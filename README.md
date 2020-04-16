@@ -13,6 +13,7 @@ It's main purpose is to speed the development of new microservices by providing 
 - A pre-commit [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to prevent dirty code to reach your local and remote repository, using [Husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged).
 - Configuration variables ready to be read from the command line arguments, environment variables or YAML files, thanks to [nconf](https://github.com/indexzero/nconf).
 - Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
+- Request validations using [joi](https://hapi.dev/module/joi/).
 - And all of this in a [Docker](https://www.docker.com/) container.
 
 ## Getting started
@@ -131,6 +132,17 @@ To solve this problem the project use a package named `app-module-path`. With it
 
 **Important:** Jest uses his own module system, so `app-module-path` won't work for the test files. To solve this, the directories have to manually be configured in `jest.config.js`, so if you create a new directory, make sure to add it in the `moduleNameMapper` property.
 
+## Request validation
+
+As you can't be sure that the users will send correct data to the service, the requests must be validated. For this, the project uses `joi` which is a powerful data validator, enabling you to describe the structure of the data that must be provided.
+
+When you create a new endpoint, be sure to validate the user input. To do this, follow the next steps:
+
+1. Create a schema under `src/validators/schemas` folder. In there, describe how the data must be provided.
+2. Create a validator under `src/validators` folder. In there, invoke the `validate()` method from the schema created in the previous step, passing the data received from the endpoint.
+3. Create a middleware to invoke the validator, under `src/middlewares` folder. If the validator gives an error, you can return an HTTP status code indicating that the request does not have the expected format.
+4. Finally, inject the middleware in your routes, under `src/routes` folder.
+
 ## Deployment
 
 To deploy the microservice, you have various options.
@@ -219,3 +231,4 @@ docker run -d -p 3000:3000 my-microservice
 - [lint-staged](https://github.com/okonet/lint-staged)
 - [nconf](https://github.com/indexzero/nconf)
 - [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node)
+- [joi](https://hapi.dev/module/joi/)
