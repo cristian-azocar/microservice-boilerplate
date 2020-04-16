@@ -129,6 +129,8 @@ For example, if we want to import a file located in `src/services/some-service` 
 
 To solve this problem the project use a package named `app-module-path`. With it, we can simple do `import someService from 'src/services/some-service'`. This is way cleaner and simple, and you don't have to mentally navigate through the directories to reach your required file, just import it using the root of the project as your starting point.
 
+**Important:** Jest uses his own module system, so `app-module-path` won't work for the test files. To solve this, the directories have to manually be configured in `jest.config.js`, so if you create a new directory, make sure to add it in the `moduleNameMapper` property.
+
 ## Deployment
 
 To deploy the microservice, you have various options.
