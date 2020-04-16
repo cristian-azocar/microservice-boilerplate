@@ -12,6 +12,7 @@ It's main purpose is to speed the development of new microservices by providing 
 - Good and clean code practices using [ESLint](https://eslint.org/) (based on [Airbnb configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)), [Prettier](https://prettier.io/) and [EditorConfig](https://editorconfig.org/).
 - A pre-commit [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to prevent dirty code to reach your local and remote repository, using [Husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged).
 - Configuration variables ready to be read from the command line arguments, environment variables or YAML files, thanks to [nconf](https://github.com/indexzero/nconf).
+- Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
 - And all of this in a [Docker](https://www.docker.com/) container.
 
 ## Getting started
@@ -120,6 +121,14 @@ The environment-specific file name is built based on the `NODE_ENV` environment 
 
 Another thing to notice, is that the `default.yml` file has the least priority, so if you forget to configure the variable in your environment, and also forget to add it to the `default.yml` file, its value will `undefined`, which might bring some unexpected problems. That's why it's highly recommended that for every configuration variable that you create, set a fallback value in the `default.yml` file, unless you actually don't care if it has an `undefined` value.
 
+## Module imports
+
+The project is configured so that you can import your own modules using absolute paths like they were installed into `node_modules` directory. This means that instead of writing `../../../some/deep/directory`, you can simple write `some/deep/directory`.
+
+For example, if we want to import a file located in `src/services/some-service` into a controller located in `src/controllers/some-controller`, we would normally do it this way `import someService from '../services/some-service'`. At first sight this doesn't look bad, but if we start to create nested folders, this could easily get out of hand. And also, when importing modules, you have to think where you are currently standing, and then navigate backwards to a higher level folder, and then go all the way down to the file that you require. This is unnecessary mental work.
+
+To solve this problem the project use a package named `app-module-path`. With it, we can simple do `import someService from 'src/services/some-service'`. This is way cleaner and simple, and you don't have to mentally navigate through the directories to reach your required file, just import it using the root of the project as your starting point.
+
 ## Deployment
 
 To deploy the microservice, you have various options.
@@ -207,3 +216,4 @@ docker run -d -p 3000:3000 my-microservice
 - [Husky](https://github.com/typicode/husky)
 - [lint-staged](https://github.com/okonet/lint-staged)
 - [nconf](https://github.com/indexzero/nconf)
+- [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node)
