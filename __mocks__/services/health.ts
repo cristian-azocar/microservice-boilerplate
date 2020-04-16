@@ -1,4 +1,4 @@
-import HealthService from '../../src/services/health';
+import HealthService from 'src/services/health';
 
 const getSpy = (): jest.SpyInstance =>
   jest.spyOn(HealthService.prototype, 'getHealthInfo').mockImplementation(() =>

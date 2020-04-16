@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import HealthController from '../../src/controllers/health';
+import HealthController from 'src/controllers/health';
 
 const getSpy = (): jest.SpyInstance =>
   jest

@@ -1,7 +1,7 @@
-import supertest, { SuperTest, Test } from 'supertest';
-import app from '../../src/app';
-import healthMatch from '../../__matches__/health';
-import healthControllerMock from '../../__mocks__/controllers/health';
+import supertest, { SuperTest, Test, Response } from 'supertest';
+import app from 'src/app';
+import healthMatch from '__tests__/schemas/health';
+import healthControllerMock from '__mocks__/controllers/health';
 
 jest.mock('../../src/controllers/health');
 
@@ -19,7 +19,7 @@ describe('health router', (): void => {
   });
 
   it('should return a JSON with the health info', async (): Promise<void> => {
-    const response = await appTest.get('/health').expect(200);
+    const response: Response = await appTest.get('/health').expect(200);
 
     expect(response.body).toMatchObject(healthMatch);
   });
