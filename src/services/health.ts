@@ -1,4 +1,4 @@
-import HealthInfo from 'src/models/health';
+import HealthInfo from 'src/models/responses/health';
 import Settings from 'settings';
 
 export default class HealthService {
