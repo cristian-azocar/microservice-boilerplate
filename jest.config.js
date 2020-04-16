@@ -7,5 +7,7 @@ module.exports = {
     settings: '<rootDir>/settings',
     '__matches__/(.*)': '<rootDir>/__matches__/$1',
     '__mocks__/(.*)': '<rootDir>/__mocks__/$1',
+    '__tests__/(.*)': '<rootDir>/__tests__/$1',
   },
+  testPathIgnorePatterns: ['<rootDir>/__tests__/schemas/'],
 };
