@@ -9,5 +9,8 @@ module.exports = {
     '__mocks__/(.*)': '<rootDir>/__mocks__/$1',
     '__tests__/(.*)': '<rootDir>/__tests__/$1',
   },
-  testPathIgnorePatterns: ['<rootDir>/__tests__/schemas/'],
+  testPathIgnorePatterns: [
+    '<rootDir>/__tests__/schemas/',
+    '<rootDir>/__tests__/matchers/',
+  ],
 };
