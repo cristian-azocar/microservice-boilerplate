@@ -1,4 +1,4 @@
-import app from '../src/app';
+import app from 'src/app';
 
 describe('server', (): void => {
   const mockListen: jest.Mock = jest.fn();
