@@ -3,6 +3,7 @@ import { createMockContext } from '@shopify/jest-koa-mocks';
 import LoginController from 'src/controllers/login';
 import loginSchema from '__tests__/schemas/login';
 import loginServiceMock from '__mocks__/services/login';
+import errorSchema from '__tests__/schemas/error';
 
 describe('login controller', (): void => {
   let spy: jest.SpyInstance;
@@ -48,9 +49,6 @@ describe('login controller', (): void => {
     await loginController.login(ctx);
 
     expect(ctx.status).toEqual(404);
-    expect(ctx.body).toMatchObject({
-      code: expect.any(Number),
-      message: expect.any(String),
-    });
+    expect(ctx.body).toMatchObject(errorSchema);
   });
 });
