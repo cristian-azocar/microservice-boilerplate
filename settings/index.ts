@@ -4,10 +4,15 @@ import yaml from 'js-yaml';
 
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
 
-// Command line args and environment vars have first priority
+// Default values have first priority
+nconf.defaults({
+  NODE_ENV,
+});
+
+// Command line args and environment vars have second priority
 nconf.argv().env();
 
-// Files based on environment have second priority
+// Files based on environment have third priority
 nconf.file({
   file: path.join(__dirname, `${NODE_ENV}.yml`),
   format: {
