@@ -5,7 +5,7 @@ describe('server', (): void => {
   const requireServer = (): void => {
     jest.isolateModules(() => {
       // eslint-disable-next-line global-require
-      require('../src/server');
+      require('src/server');
     });
   };
 

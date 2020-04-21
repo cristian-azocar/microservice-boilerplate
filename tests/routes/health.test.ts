@@ -3,7 +3,7 @@ import app from 'src/app';
 import healthMatch from 'tests/schemas/health';
 import healthControllerMock from 'tests/mocks/controllers/health';
 
-jest.mock('../../src/controllers/health');
+jest.mock('src/controllers/health');
 
 const appTest: SuperTest<Test> = supertest(app.callback());
 
