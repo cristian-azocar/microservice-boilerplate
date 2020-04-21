@@ -91,7 +91,7 @@ Note that the `docker-compose` file is only meant to be used during development.
 ### Unit tests
 
 The unit tests test the server, routes, controllers and services.
-You might have noticed that there is a `__tests__/schemas` folder. There goes the values that are expected from the responses.
+You might have noticed that there is a `tests/schemas` folder. There goes the values that are expected from the responses.
 
 Run the unit tests
 
