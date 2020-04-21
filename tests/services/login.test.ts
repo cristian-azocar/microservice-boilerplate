@@ -1,6 +1,6 @@
 import LoginService from 'src/services/login';
 import LoginResponse from 'src/models/responses/login';
-import loginSchema from '__tests__/schemas/login';
+import loginSchema from 'tests/schemas/login';
 
 describe('login service', (): void => {
   it('should return the login information', async (): Promise<void> => {

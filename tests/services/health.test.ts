@@ -1,6 +1,6 @@
 import HealthService from 'src/services/health';
 import HealthInfo from 'src/models/responses/health';
-import healthInfoMatch from '__tests__/schemas/health';
+import healthInfoMatch from 'tests/schemas/health';
 
 describe('health service', (): void => {
   it('should return the service health', async (): Promise<void> => {

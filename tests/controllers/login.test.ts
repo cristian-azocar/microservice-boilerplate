@@ -1,16 +1,12 @@
 import { Context } from 'koa';
 import { createMockContext } from '@shopify/jest-koa-mocks';
 import LoginController from 'src/controllers/login';
-import loginSchema from '__tests__/schemas/login';
-import loginServiceMock from '__mocks__/services/login';
-import errorSchema from '__tests__/schemas/error';
+import loginSchema from 'tests/schemas/login';
+import loginServiceMock from 'tests/mocks/services/login';
+import errorSchema from 'tests/schemas/error';
 
 describe('login controller', (): void => {
   let spy: jest.SpyInstance;
-
-  // beforeAll((): void => {
-  //   spy = loginServiceMock.getSpy();
-  // });
 
   afterAll((): void => {
     spy.mockRestore();

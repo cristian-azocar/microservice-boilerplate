@@ -1,9 +1,9 @@
 import supertest, { SuperTest, Test, Response } from 'supertest';
 import app from 'src/app';
-import loginSchema from '__tests__/schemas/login';
-import loginControllerMock from '__mocks__/controllers/login';
+import loginSchema from 'tests/schemas/login';
+import loginControllerMock from 'tests/mocks/controllers/login';
 
-jest.mock('../../src/controllers/login');
+jest.mock('src/controllers/login');
 
 const appTest: SuperTest<Test> = supertest(app.callback());
 

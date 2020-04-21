@@ -1,7 +1,7 @@
 import { createMockContext } from '@shopify/jest-koa-mocks';
 import { Context } from 'koa';
 import LoginMiddleware from 'src/middlewares/login';
-import errorSchema from '__tests__/schemas/error';
+import errorSchema from 'tests/schemas/error';
 
 it('should invoke an injected function when request is valid', (): void => {
   const loginMiddleware: LoginMiddleware = new LoginMiddleware();

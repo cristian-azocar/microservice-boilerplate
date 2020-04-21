@@ -1,7 +1,7 @@
 import supertest, { SuperTest, Test, Response } from 'supertest';
 import app from 'src/app';
-import healthMatch from '__tests__/schemas/health';
-import healthControllerMock from '__mocks__/controllers/health';
+import healthMatch from 'tests/schemas/health';
+import healthControllerMock from 'tests/mocks/controllers/health';
 
 jest.mock('../../src/controllers/health');
 

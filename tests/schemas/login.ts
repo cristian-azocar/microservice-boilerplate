@@ -1,4 +1,4 @@
-import '../matchers/to-be-types';
+import 'tests/matchers/to-be-types';
 
 export default {
   username: expect.any(String),
