@@ -1,7 +1,7 @@
 module.exports = {
   roots: ['<rootDir>/tests'],
   preset: 'ts-jest',
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts', '<rootDir>/settings/**/*.ts'],
   moduleNameMapper: {
     'src/(.*)': '<rootDir>/src/$1',
     settings: '<rootDir>/settings',
