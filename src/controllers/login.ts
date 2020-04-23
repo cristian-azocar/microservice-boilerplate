@@ -14,8 +14,11 @@ export default class LoginController {
     );
 
     if (!loginResponse) {
-      ctx.status = 404;
-      ctx.body = new ErrorResponse(ctx.status, 'user not found');
+      ctx.status = 401;
+      ctx.body = new ErrorResponse(
+        ctx.status,
+        'Username or password incorrect'
+      );
       return;
     }
 

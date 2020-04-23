@@ -1,0 +1,21 @@
+properties:
+  username:
+    type: string
+    description: The user name
+    example: john.doe
+  name:
+    type: string
+    description: The name of the user
+    example: John
+  lastName:
+    type: string
+    description: The last name of the user
+    example: Doe
+  email:
+    type: string
+    description: The e-mail of the user
+    example: john.doe@fake.com
+  createdAt:
+    type: string
+    description: The date the account was created
+    example: '2020-04-23T17:59:52.446Z'

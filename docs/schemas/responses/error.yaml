@@ -1,0 +1,9 @@
+properties:
+  code:
+    type: integer
+    description: The code of the error
+    example: 500
+  message:
+    type: string
+    description: The description of the error
+    example: Internal Server Error

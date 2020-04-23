@@ -5,7 +5,7 @@ info:
 
 servers:
   - url: http://localhost:3000
-    description: Development server.
+    description: Development server
 
 paths:
   /health:
