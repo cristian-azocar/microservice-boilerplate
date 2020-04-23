@@ -162,6 +162,18 @@ When you create a new endpoint, be sure to validate the user input. To do this, 
 3. Create a middleware to invoke the validator, under `src/middlewares` folder. If the validator gives an error, you can return an HTTP status code indicating that the request does not have the expected format.
 4. Finally, inject the middleware in your routes, under `src/routes` folder.
 
+## API documentation
+
+Almost no one likes to document, is tedious and boring, and for that reason I tried to search a solution that could easier my life. That's where I found about OpenAPI, a specification for describing your service in a very simple way; I highly recommend that you take a look about it before proceeding further. The Swagger tools are used to provide a web page to interact and navigate the documentation, making it easier to discover what provides the API.
+
+The documentation is dynamically generated using Swagger based on the YAML files located in the `docs` folder, so when you make new endpoints or update old ones, make sure to keep those files up to date. The structure of the `docs` directory is as follows:
+
+- index.yaml: this is the root file, and where the paths files are referenced.
+- /paths: here goes the paths files where you describe your endpoints.
+- /schemas: here goes the schemas which describes the objects that the endpoints receives and responds.
+
+The specification is splitted in smaller files because is easier to maintain, but that introduced a little problem. As of the writing of this document, relative paths does not work at all, so when you reference a file, an error is raised indicating that the file could not be found. To fix this, at the moment the documentation is generated, a merge is done, unifying all the files into a single one and so the relative paths dissapear (credits to [json-refs](https://github.com/whitlockjc/json-refs)).
+
 ## Deployment
 
 To deploy the microservice, you have various options.
