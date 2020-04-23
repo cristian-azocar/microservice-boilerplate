@@ -1,7 +1,25 @@
 # Microservice Boilerplate
 
-A simple RESTful microservice boilerplate using [Node.js](https://nodejs.org/), [Koa](https://koajs.com/), [Typescript](https://www.typescriptlang.org/) and other awesome tools.
+A **highly opinionated** RESTful microservice boilerplate using [Node.js](https://nodejs.org/), [Koa](https://koajs.com/), [Typescript](https://www.typescriptlang.org/) and other awesome tools.
 It's main purpose is to speed the development of new microservices by providing an already configured project, using the best tools and a scalable code structure.
+
+## Table of contents
+
+- [What is included in this boilerplate?](#what-is-included-in-this-boilerplate?)
+- [Getting started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installing](#installing)
+  - [IDE configuration](#ide-configuration)
+- [Running the microservice](#running-the-microservice)
+- [Running the tests](#running-the-tests)
+  - [Unit tests](#unit-tests)
+- [Configuration variables](#configuration-variables)
+- [Module imports](#module-imports)
+- [Request validation](#request-validation)
+- [Deployment](#deployment)
+  - [Manual deploy](#manual-deploy)
+  - [Deploy with Docker](#deploy-with-docker)
+- [Built with](#built-with)
 
 ## What is included in this boilerplate?
 
@@ -14,6 +32,7 @@ It's main purpose is to speed the development of new microservices by providing 
 - Configuration variables ready to be read from the command line arguments, environment variables or YAML files, thanks to [nconf](https://github.com/indexzero/nconf).
 - Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
 - Request validations using [joi](https://hapi.dev/module/joi/).
+- API documentation using the [OpenAPI](https://www.openapis.org/) specification and [Swagger](https://swagger.io/).
 - And all of this in a [Docker](https://www.docker.com/) container.
 
 ## Getting started
@@ -232,3 +251,5 @@ docker run -d -p 3000:3000 my-microservice
 - [nconf](https://github.com/indexzero/nconf)
 - [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node)
 - [joi](https://hapi.dev/module/joi/)
+- [OpenAPI](https://www.openapis.org/)
+- [Swagger](https://swagger.io/)
