@@ -48,11 +48,14 @@
     "@hapi/joi": "^17.1.1",
     "app-module-path": "^2.2.0",
     "js-yaml": "^3.13.1",
+    "json-refs": "^3.0.15",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-logger": "^3.2.1",
     "koa-router": "^8.0.8",
     "koa-static": "^5.0.0",
-    "nconf": "^0.10.0"
+    "koa2-swagger-ui": "^3.0.0",
+    "nconf": "^0.10.0",
+    "swagger2-koa": "^2.0.0"
   }
 }
