@@ -170,7 +170,7 @@ Almost no one likes to document, is tedious and boring, and for that reason I tr
 The documentation is dynamically generated using Swagger based on the YAML files located in the `docs` folder, so when you make new endpoints or update old ones, make sure to keep those files up to date. The structure of the `docs` directory is as follows:
 
 - `index.yaml`: this is the root file, and where the paths files are referenced.
-- `/paths`: here goes the paths files where you describe your endpoints.
+- `/paths`: here goes the paths files where the endpoints are described.
 - `/schemas`: here goes the schemas which describes the objects that the endpoints receives and responds.
 
 The specification is splitted in smaller files because is easier to maintain, but that introduced a little problem. As of the writing of this document, relative paths does not work at all, so when you reference a file, an error is raised indicating that the file could not be found. To fix this, at the moment the documentation is generated, a merge is done, unifying all the files into a single one and so the relative paths dissapear (credits to [json-refs](https://github.com/whitlockjc/json-refs)).
