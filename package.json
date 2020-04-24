@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "@koa/cors": "^2.2.3",
+    "@koa/cors": "^3.0.0",
     "app-module-path": "^2.2.0",
     "js-yaml": "^3.13.1",
     "json-refs": "^3.0.15",
