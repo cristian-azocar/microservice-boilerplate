@@ -140,7 +140,7 @@ The hierarchical order of priority is as follows
 
 The environment-specific file name is built based on the `NODE_ENV` environment variable value. For example, if your `NODE_ENV` value is `staging`, then the microservice will search for a file named `staging.yml`.
 
-Another thing to notice, is that the `default.yml` file has the least priority, so if you forget to configure the variable in your environment, and also forget to add it to the `default.yml` file, its value will `undefined`, which might bring some unexpected problems. That's why it's highly recommended that for every configuration variable that you create, set a fallback value in the `default.yml` file, unless you actually don't care if it has an `undefined` value.
+Another thing to notice, is that the `default.yml` file has the least priority, so if you forget to configure the variable in your environment, and also forget to add it to the `default.yml` file, its value will be `undefined`, which might bring some unexpected problems. That's why it's highly recommended that for every configuration variable that you create, set a fallback value in the `default.yml` file, unless you actually don't care if it has an `undefined` value.
 
 ## Module imports
 
