@@ -12,7 +12,7 @@ describe('login controller', (): void => {
     spy.mockRestore();
   });
 
-  it('should set ctx.body with login information', async (): Promise<void> => {
+  it('should login the user', async (): Promise<void> => {
     spy = loginServiceMock.getSpy();
 
     const loginController: LoginController = new LoginController();
@@ -29,7 +29,7 @@ describe('login controller', (): void => {
     expect(ctx.body.username).toEqual(ctx.request.body.username);
   });
 
-  it('should set ctx.body with an error object and ctx.status with a 404 code when credentials are invalid', async (): Promise<
+  it('should return an error when credentials are invalid', async (): Promise<
     void
   > => {
     spy = loginServiceMock.getSpy({ simulateUserNotFound: true });
@@ -44,7 +44,7 @@ describe('login controller', (): void => {
 
     await loginController.login(ctx);
 
-    expect(ctx.status).toEqual(404);
+    expect(ctx.status).toEqual(401);
     expect(ctx.body).toMatchObject(errorSchema);
   });
 });
