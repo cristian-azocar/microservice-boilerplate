@@ -2,8 +2,7 @@
 
 [![dependencies Status](https://david-dm.org/cristian-azocar/microservice-boilerplate/status.svg)](https://david-dm.org/cristian-azocar/microservice-boilerplate)
 
-A **highly opinionated** RESTful microservice boilerplate using [Node.js](https://nodejs.org/), [Koa](https://koajs.com/), [Typescript](https://www.typescriptlang.org/) and other awesome tools.
-It's main purpose is to speed the development of new microservices by providing an already configured project, using the best tools and a scalable code structure.
+A **highly opinionated** RESTful microservice boilerplate using [Node.js](https://nodejs.org/), [Koa](https://koajs.com/), [Typescript](https://www.typescriptlang.org/) and other awesome tools. It's main purpose is to speed the development of new microservices by providing an already configured project, using the best tools and a scalable code structure.
 
 ## Table of contents
 
@@ -191,8 +190,7 @@ If you want to manually deploy the microservice, first transpile the typescript 
 npm run build
 ```
 
-This will create a `dist` folder with the code transpiled to Javascript.
-Copy that folder, the `package.json` and the `package-lock.json` files, and put them wherever you are going to make the deploy.
+This will create a `dist` folder with the code transpiled to Javascript. Copy that folder, the `package.json` and the `package-lock.json` files, and put them wherever you are going to make the deploy.
 
 Now, install the dependencies where you copied the files.
 
@@ -219,8 +217,7 @@ docker image prune -f
 
 **Note:** The tag `my-microservice` is an example, use whatever name you like.
 
-This will create an image with the code transpiled to plain Javascript and with only the needed dependencies.
-The production stage is the last one, so we don't have to specify the `--target` option.
+This will create an image with the code transpiled to plain Javascript and with only the needed dependencies. The production stage is the last one, so we don't have to specify the `--target` option.
 
 Now, you can upload the image to [Docker Hub](https://hub.docker.com/) and then download it on your server from the repository
 
