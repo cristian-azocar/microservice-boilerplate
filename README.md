@@ -175,6 +175,8 @@ The documentation is dynamically generated using Swagger based on the YAML files
 
 The specification is splitted in smaller files because is easier to maintain, but that introduced a little problem. As of the writing of this document, relative paths does not work at all, so when you reference a file, an error is raised indicating that the file could not be found. To fix this, at the moment the documentation is generated, a merge is done, unifying all the files into a single one and so the relative paths dissapear (credits to [json-refs](https://github.com/whitlockjc/json-refs)).
 
+To see the documentation navigate to `http://localhost:3000/docs`.
+
 ## Deployment
 
 To deploy the microservice, you have various options.
