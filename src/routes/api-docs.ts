@@ -1,8 +1,8 @@
-import { Middleware } from 'koa';
+import { Middleware, Context, Next } from 'koa';
 import Router from 'koa-router';
 import ApiDocsUtils from 'src/utils/api-docs';
 
-export default class ApiDocs {
+export default class ApiDocsRouter {
   router: Router = new Router();
   apiDocsUtils: ApiDocsUtils = new ApiDocsUtils();
 
@@ -10,11 +10,16 @@ export default class ApiDocs {
     this.buildRoutes();
   }
 
-  private async buildRoutes(): Promise<void> {
+  private buildRoutes(): void {
     const { router, apiDocsUtils } = this;
-    const swaggerMiddleware: Middleware = await apiDocsUtils.getSwaggerMiddleware();
 
-    router.get('/docs', swaggerMiddleware);
+    router.get(
+      '/docs',
+      async (ctx: Context, next: Next): Promise<void> => {
+        const swaggerMiddleware: Middleware = await apiDocsUtils.getSwaggerMiddleware();
+        swaggerMiddleware(ctx, next);
+      }
+    );
   }
 
   getRoutes(): Middleware {
