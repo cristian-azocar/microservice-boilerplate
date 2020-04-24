@@ -15,7 +15,7 @@ describe('health controllers', (): void => {
     spy.mockRestore();
   });
 
-  it('should set ctx body with health information', async (): Promise<void> => {
+  it('should return the health information', async (): Promise<void> => {
     const healthController: HealthController = new HealthController();
     const ctx: Context = createMockContext();
 
