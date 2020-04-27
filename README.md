@@ -18,6 +18,7 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - [Module imports](#module-imports)
 - [Request validation](#request-validation)
 - [API documentation](#api-documentation)
+- [CORS](#cors)
 - [Deployment](#deployment)
   - [Manual deploy](#manual-deploy)
   - [Deploy with Docker](#deploy-with-docker)
@@ -35,6 +36,7 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
 - Request validations using [joi](https://hapi.dev/module/joi/).
 - API documentation using the [OpenAPI](https://www.openapis.org/) specification and [Swagger](https://swagger.io/).
+- CORS support thanks to [koa-cors](https://github.com/koajs/cors) middleware.
 - And all of this in a [Docker](https://www.docker.com/) container.
 
 ## Getting started
@@ -177,6 +179,10 @@ The documentation is dynamically generated using Swagger based on the YAML files
 The specification is splitted in smaller files because is easier to maintain, but that introduced a little problem. As of the writing of this document, relative paths does not work at all, so when you reference a file, an error is raised indicating that the file could not be found. To fix this, at the moment the documentation is generated, a merge is done, unifying all the files into a single one and so the relative paths dissapear (credits to [json-refs](https://github.com/whitlockjc/json-refs)).
 
 To see the documentation navigate to `http://localhost:3000/docs`
+
+## CORS
+
+CORS is enabled thanks to the [koa-cors](https://github.com/koajs/cors) middleware. If you want to add rules, check the official documentation for more details.
 
 ## Deployment
 
