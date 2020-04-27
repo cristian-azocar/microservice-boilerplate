@@ -5,10 +5,11 @@ import fs from 'fs';
 import jsonRefs from 'json-refs';
 
 export default class ApiDocsUtils {
-  openApiPath = './docs/index.yaml';
-  jsonRefsOptions: jsonRefs.JsonRefsOptions = {
+  private openApiPath = './docs/index.yaml';
+  private jsonRefsOptions: jsonRefs.JsonRefsOptions = {
     location: this.openApiPath,
     loaderOptions: {
+      /* istanbul ignore next */
       processContent(res: any, callback: Function): void {
         callback(yaml.safeLoad(res.text));
       },
