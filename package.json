@@ -58,7 +58,6 @@
     "koa-router": "^8.0.8",
     "koa-static": "^5.0.0",
     "koa2-swagger-ui": "^3.0.0",
-    "nconf": "^0.10.0",
-    "swagger2-koa": "^2.0.0"
+    "nconf": "^0.10.0"
   }
 }
