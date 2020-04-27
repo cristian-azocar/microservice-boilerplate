@@ -33,7 +33,7 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - Good and clean code practices using [ESLint](https://eslint.org/) (based on [Airbnb configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)), [Prettier](https://prettier.io/) and [EditorConfig](https://editorconfig.org/).
 - A pre-commit [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to prevent dirty code to reach your local and remote repository, using [Husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged).
 - Configuration variables ready to be read from the command line arguments, environment variables or YAML files, thanks to [nconf](https://github.com/indexzero/nconf).
-- Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
+- Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to TypeScript and [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
 - Request validations using [joi](https://hapi.dev/module/joi/).
 - API documentation using the [OpenAPI](https://www.openapis.org/) specification and [Swagger](https://swagger.io/).
 - CORS support thanks to [koa-cors](https://github.com/koajs/cors) middleware.
@@ -151,7 +151,9 @@ The project is configured so that you can import your own modules using absolute
 
 For example, if we want to import a file located in `src/services/some-service` into a controller located in `src/controllers/some-controller`, we would normally do it this way `import someService from '../services/some-service'`. At first sight this doesn't look bad, but if we start to create nested folders, this could easily get out of hand. And also, when importing modules, you have to think where you are currently standing, and then navigate backwards to a higher level folder, and then go all the way down to the file that you require. This is unnecessary mental work.
 
-To solve this problem the project use a package named `app-module-path`. With it, we can simple do `import someService from 'src/services/some-service'`. This is way cleaner and simple, and you don't have to mentally navigate through the directories to reach your required file, just import it using the root of the project as your starting point.
+To solve this problem, the project uses a configuration of TypeScript where we can specify path mapping in the `tsconfig.json` file, specifically in the `paths` property. This allow us to map module paths to physical paths in the filesystem, so for example, we can simple do `import someService from 'src/services/some-service'`. This is way cleaner and simple, and you don't have to mentally navigate through the directories to reach your required file, just import it using the root of the project as your starting point.
+
+There is a problem though, because when the TypeScript files are compiled, JavaScript will not understand those paths as it will try to search those modules in the `node_modules` directory. To solve this, we use a package named `app-module-path`.
 
 **Important:** Jest uses his own module system, so `app-module-path` won't work for the test files. To solve this, the directories have to manually be configured in `jest.config.js`, so if you create a new directory, make sure to add it in the `moduleNameMapper` property.
 
