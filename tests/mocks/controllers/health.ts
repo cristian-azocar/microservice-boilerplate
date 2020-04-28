@@ -1,10 +1,9 @@
 import { Context } from 'koa';
 import HealthController from 'src/controllers/health';
 
-const getSpy = (): jest.SpyInstance =>
-  jest
-    .spyOn(HealthController.prototype, 'getHealthInfo')
-    .mockImplementation((ctx: Context) => {
+function HealthControllerMock(): Partial<HealthController> {
+  return {
+    getHealthInfo: (ctx: Context): Promise<void> => {
       ctx.body = {
         nodeVersion: 'v12.14.1',
         service: 'MS Test Boilerplate',
@@ -23,8 +22,8 @@ const getSpy = (): jest.SpyInstance =>
       };
 
       return Promise.resolve();
-    });
+    },
+  };
+}
 
-export default {
-  getSpy,
-};
+jest.mock('src/controllers/health', () => HealthControllerMock);

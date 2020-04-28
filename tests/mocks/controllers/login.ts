@@ -1,10 +1,9 @@
 import { Context } from 'koa';
 import LoginController from 'src/controllers/login';
 
-const getSpy = (): jest.SpyInstance =>
-  jest
-    .spyOn(LoginController.prototype, 'login')
-    .mockImplementation((ctx: Context) => {
+function LoginControllerMock(): Partial<LoginController> {
+  return {
+    login: (ctx: Context): Promise<void> => {
       ctx.body = {
         username: ctx.request.body.username,
         name: 'John',
@@ -14,8 +13,8 @@ const getSpy = (): jest.SpyInstance =>
       };
 
       return Promise.resolve();
-    });
+    },
+  };
+}
 
-export default {
-  getSpy,
-};
+jest.mock('src/controllers/login', () => LoginControllerMock);

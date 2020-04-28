@@ -9,13 +9,13 @@ const koaSwagger = (): Middleware => {
   };
 };
 
-jest.mock('src/utils/api-docs', () => {
-  return function constructor(): Partial<ApiDocsUtils> {
-    return {
-      getSwaggerMiddleware: async (): Promise<Middleware> => {
-        await Promise.resolve();
-        return koaSwagger();
-      },
-    };
+function ApiDocsUtilsMock(): Partial<ApiDocsUtils> {
+  return {
+    getSwaggerMiddleware: async (): Promise<Middleware> => {
+      await Promise.resolve();
+      return koaSwagger();
+    },
   };
-});
+}
+
+jest.mock('src/utils/api-docs', () => ApiDocsUtilsMock);
