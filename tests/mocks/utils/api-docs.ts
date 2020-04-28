@@ -9,18 +9,13 @@ const koaSwagger = (): Middleware => {
   };
 };
 
-const spyOn: any = {
-  getSwaggerMiddleware: (): jest.SpyInstance =>
-    jest
-      .spyOn(ApiDocsUtils.prototype, 'getSwaggerMiddleware')
-      .mockImplementation(
-        async (): Promise<Middleware> => {
-          await Promise.resolve();
-          return koaSwagger();
-        }
-      ),
-};
-
-export default {
-  spyOn,
-};
+jest.mock('src/utils/api-docs', () => {
+  return function constructor(): Partial<ApiDocsUtils> {
+    return {
+      getSwaggerMiddleware: async (): Promise<Middleware> => {
+        await Promise.resolve();
+        return koaSwagger();
+      },
+    };
+  };
+});

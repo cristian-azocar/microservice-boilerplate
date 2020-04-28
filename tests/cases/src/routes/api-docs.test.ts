@@ -1,14 +1,10 @@
+import 'tests/mocks/utils/api-docs';
 import supertest, { SuperTest, Test, Response } from 'supertest';
 import app from 'src/app';
-import apiDocsUtilsMock from 'tests/mocks/utils/api-docs';
 
 const appTest: SuperTest<Test> = supertest(app.callback());
 
 describe('api-docs router', (): void => {
-  beforeAll((): void => {
-    apiDocsUtilsMock.spyOn.getSwaggerMiddleware();
-  });
-
   afterAll((): void => {
     jest.restoreAllMocks();
   });
