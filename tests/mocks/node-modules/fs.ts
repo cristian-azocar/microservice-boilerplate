@@ -1,4 +1,4 @@
-const fs: typeof jest = jest.mock('fs', () => ({
+jest.mock('fs', () => ({
   __esModule: true,
   default: {
     readFileSync: (): string => {
@@ -6,5 +6,3 @@ const fs: typeof jest = jest.mock('fs', () => ({
     },
   },
 }));
-
-export default fs;

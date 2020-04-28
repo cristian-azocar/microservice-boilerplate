@@ -1,4 +1,4 @@
-const jsonRefs: typeof jest = jest.mock('json-refs', () => ({
+jest.mock('json-refs', () => ({
   __esModule: true,
   default: {
     resolveRefs: (): Promise<any> => {
@@ -8,5 +8,3 @@ const jsonRefs: typeof jest = jest.mock('json-refs', () => ({
     },
   },
 }));
-
-export default jsonRefs;

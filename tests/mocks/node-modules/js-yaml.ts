@@ -1,4 +1,4 @@
-const yaml: typeof jest = jest.mock('js-yaml', () => ({
+jest.mock('js-yaml', () => ({
   __esModule: true,
   default: {
     safeLoad: (): object => {
@@ -6,5 +6,3 @@ const yaml: typeof jest = jest.mock('js-yaml', () => ({
     },
   },
 }));
-
-export default yaml;
