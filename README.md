@@ -113,8 +113,7 @@ Note that the `docker-compose` file is only meant to be used during development.
 
 ### Unit tests
 
-The unit tests test the server, routes, controllers and services.
-You might have noticed that there is a `tests/schemas` folder. There goes the values that are expected from the responses.
+The unit tests are executed with Jest and they cover the server, routes, controllers, middlewares, among other modules. The project also includes coverage test.
 
 Run the unit tests
 
@@ -127,6 +126,38 @@ Run the unit tests with coverage included
 ```
 npm run test:coverage
 ```
+
+**Note:** To see the detailed results of the coverage, open the file found in `coverage/lcov-report/index.html`.
+
+The structure of the `tests` folder is as follow:
+
+- `cases`: all the tests goes here and are ordered based on the project folder structure. For example, all controllers tests goes in `tests/cases/src/controllers`.
+- `fixtures`: the data shared by the tests which simulate external sources. For example, to simulate the data obtained from a database or an external API, it can be stored here.
+- `matchers`: the custom matchers used to make assertions. For example, to create a matcher to verify that an object has certain types, it can be stored here.
+- `mocks`: the mocks of custom modules or from the `node_modules` folder. Basically here we can change the behaviour of the modules to isolate our tests.
+- `schemas`: the schemas which describes the structure of an object. It's used to assert that an object has a valid structure.
+
+#### Mocks
+
+The mocks must be imported at the very top of the file, so this way the following imported modules will use the mocked version, instead of the real one:
+
+```javascript
+import 'tests/mocks/utils/api-docs';
+// All other imports must go below.
+// In this example, if a module imports the "api-docs" class, it will use the mocked version.
+```
+
+Remember to restore it when the tests are finished:
+
+```javascript
+afterAll((): void => {
+  jest.restoreAllMocks();
+});
+```
+
+Some modules in the `node_modules` folder are also mocked, and can be imported one by one, or by only importing `tests/mocks/node-modules/mock-all`. If you create new mocks, be sure to keep that file up to date.
+
+Another thing to notice, is that the mocks constructors are declared using the `function()` syntax, because calling `new` in arrow functions [is not allowed in JavaScript](https://jestjs.io/docs/en/es6-class-mocks#mock-using-module-factory-parameter).
 
 ## Configuration variables
 
