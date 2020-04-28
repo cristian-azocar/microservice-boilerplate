@@ -159,6 +159,16 @@ Some modules in the `node_modules` folder are also mocked, and can be imported o
 
 Another thing to notice, is that the mocks constructors are declared using the `function()` syntax, because calling `new` in arrow functions [is not allowed in JavaScript](https://jestjs.io/docs/en/es6-class-mocks#mock-using-module-factory-parameter).
 
+## ESLint + Prettier
+
+The project uses ESLint and Prettier to analyze, format and find problems in the code. The rules are based on the [Airbnb configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb), but further customization can be done in the `.eslintrc.json` file.
+
+In the [IDE configuration](#ide-configuration) section of the document it's specified that is recommended to enable the `auto-format on save` feature of the IDE that you are using, so that way the code will automatically format without having to run any command. But nevertheless, if you want to manually execute the analysis, run the following command:
+
+```
+npm run lint
+```
+
 ## Configuration variables
 
 The microservice is ready to read configuration variables so you can dynamically set parameters without having to re-build the application, either by command line arguments, environment variables, environment-specific files or a default file. All configuration files must be in [YAML](https://yaml.org/) format.
