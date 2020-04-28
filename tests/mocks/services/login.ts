@@ -1,30 +1,17 @@
 import LoginService from 'src/services/login';
+import LoginResponse from 'src/models/responses/login';
+import users from 'tests/fixtures/users';
 
-export interface MockOptions {
-  simulateUserNotFound: boolean;
+function LoginServiceMock(): Partial<LoginService> {
+  return {
+    login: (username: string, password: string): Promise<LoginResponse> => {
+      const user = users.find(
+        (u) => u.username === username && u.password === password
+      );
+
+      return Promise.resolve(user);
+    },
+  };
 }
 
-const defaultMockOptions: MockOptions = {
-  simulateUserNotFound: false,
-};
-
-const getSpy = (options: MockOptions = defaultMockOptions): jest.SpyInstance =>
-  jest
-    .spyOn(LoginService.prototype, 'login')
-    .mockImplementation((username: string) => {
-      if (options.simulateUserNotFound) {
-        return Promise.resolve(null);
-      }
-
-      return Promise.resolve({
-        username,
-        name: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@fake.com',
-        createdAt: new Date(),
-      });
-    });
-
-export default {
-  getSpy,
-};
+jest.mock('src/services/login', () => LoginServiceMock);

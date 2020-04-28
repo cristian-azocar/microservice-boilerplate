@@ -14,10 +14,14 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - [Running the microservice](#running-the-microservice)
 - [Running the tests](#running-the-tests)
   - [Unit tests](#unit-tests)
+    - [Mocks](#mocks)
+- [ESLint + Prettier](#eslint-+-prettier)
 - [Configuration variables](#configuration-variables)
 - [Module imports](#module-imports)
 - [Request validation](#request-validation)
 - [API documentation](#api-documentation)
+- [CORS](#cors)
+- [Git Hooks](#git-hooks)
 - [Deployment](#deployment)
   - [Manual deploy](#manual-deploy)
   - [Deploy with Docker](#deploy-with-docker)
@@ -32,9 +36,10 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - Good and clean code practices using [ESLint](https://eslint.org/) (based on [Airbnb configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)), [Prettier](https://prettier.io/) and [EditorConfig](https://editorconfig.org/).
 - A pre-commit [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to prevent dirty code to reach your local and remote repository, using [Husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged).
 - Configuration variables ready to be read from the command line arguments, environment variables or YAML files, thanks to [nconf](https://github.com/indexzero/nconf).
-- Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
+- Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to TypeScript and [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
 - Request validations using [joi](https://hapi.dev/module/joi/).
 - API documentation using the [OpenAPI](https://www.openapis.org/) specification and [Swagger](https://swagger.io/).
+- CORS support thanks to [koa-cors](https://github.com/koajs/cors) middleware.
 - And all of this in a [Docker](https://www.docker.com/) container.
 
 ## Getting started
@@ -111,8 +116,7 @@ Note that the `docker-compose` file is only meant to be used during development.
 
 ### Unit tests
 
-The unit tests test the server, routes, controllers and services.
-You might have noticed that there is a `tests/schemas` folder. There goes the values that are expected from the responses.
+The unit tests are executed with Jest and they cover the server, routes, controllers, middlewares, among other modules. The project also includes coverage test.
 
 Run the unit tests
 
@@ -124,6 +128,48 @@ Run the unit tests with coverage included
 
 ```
 npm run test:coverage
+```
+
+**Note:** To see the detailed results of the coverage, open the file found in `coverage/lcov-report/index.html`.
+
+The structure of the `tests` folder is as follow:
+
+- `cases`: all the tests goes here and are ordered based on the project folder structure. For example, all controllers tests goes in `tests/cases/src/controllers`.
+- `fixtures`: the data shared by the tests which simulate external sources. For example, to simulate the data obtained from a database or an external API, it can be stored here.
+- `matchers`: the custom matchers used to make assertions. For example, to create a matcher to verify that an object has certain types, it can be stored here.
+- `mocks`: the mocks of custom modules or from the `node_modules` folder. Basically here we can change the behaviour of the modules to isolate our tests.
+- `schemas`: the schemas which describes the structure of an object. It's used to assert that an object has a valid structure.
+
+#### Mocks
+
+The mocks must be imported at the very top of the file, so this way the following imported modules will use the mocked version, instead of the real one:
+
+```javascript
+import 'tests/mocks/utils/api-docs';
+// All other imports must go below.
+// In this example, if a module imports the "api-docs" class, it will use the mocked version.
+```
+
+Remember to restore it when the tests are finished:
+
+```javascript
+afterAll((): void => {
+  jest.restoreAllMocks();
+});
+```
+
+Some modules in the `node_modules` folder are also mocked, and can be imported one by one, or by only importing `tests/mocks/node-modules/mock-all`. If you create new mocks, be sure to keep that file up to date.
+
+Another thing to notice, is that the mocks constructors are declared using the `function()` syntax, because calling `new` in arrow functions [is not allowed in JavaScript](https://jestjs.io/docs/en/es6-class-mocks#mock-using-module-factory-parameter).
+
+## ESLint + Prettier
+
+The project uses ESLint and Prettier to analyze, format and find problems in the code. The rules are based on the [Airbnb configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb), but further customization can be done in the `.eslintrc.json` file.
+
+In the [IDE configuration](#ide-configuration) section of the document it's specified that is recommended to enable the `auto-format on save` feature of the IDE that you are using, so that way the code will automatically format without having to run any command. But nevertheless, if you want to manually execute the analysis, run the following command:
+
+```
+npm run lint
 ```
 
 ## Configuration variables
@@ -149,7 +195,9 @@ The project is configured so that you can import your own modules using absolute
 
 For example, if we want to import a file located in `src/services/some-service` into a controller located in `src/controllers/some-controller`, we would normally do it this way `import someService from '../services/some-service'`. At first sight this doesn't look bad, but if we start to create nested folders, this could easily get out of hand. And also, when importing modules, you have to think where you are currently standing, and then navigate backwards to a higher level folder, and then go all the way down to the file that you require. This is unnecessary mental work.
 
-To solve this problem the project use a package named `app-module-path`. With it, we can simple do `import someService from 'src/services/some-service'`. This is way cleaner and simple, and you don't have to mentally navigate through the directories to reach your required file, just import it using the root of the project as your starting point.
+To solve this problem, the project uses a configuration of TypeScript where we can specify path mapping in the `tsconfig.json` file, specifically in the `paths` property. This allow us to map module paths to physical paths in the filesystem, so for example, we can simple do `import someService from 'src/services/some-service'`. This is way cleaner and simple, and you don't have to mentally navigate through the directories to reach your required file, just import it using the root of the project as your starting point.
+
+There is a problem though, because when the TypeScript files are compiled, JavaScript will not understand those paths as it will try to search those modules in the `node_modules` directory. To solve this, we use a package named `app-module-path`.
 
 **Important:** Jest uses his own module system, so `app-module-path` won't work for the test files. To solve this, the directories have to manually be configured in `jest.config.js`, so if you create a new directory, make sure to add it in the `moduleNameMapper` property.
 
@@ -177,6 +225,16 @@ The documentation is dynamically generated using Swagger based on the YAML files
 The specification is splitted in smaller files because is easier to maintain, but that introduced a little problem. As of the writing of this document, relative paths does not work at all, so when you reference a file, an error is raised indicating that the file could not be found. To fix this, at the moment the documentation is generated, a merge is done, unifying all the files into a single one and so the relative paths dissapear (credits to [json-refs](https://github.com/whitlockjc/json-refs)).
 
 To see the documentation navigate to `http://localhost:3000/docs`
+
+## CORS
+
+CORS is enabled thanks to the [koa-cors](https://github.com/koajs/cors) middleware. If you want to add rules, check the official documentation for more details.
+
+## Git Hooks
+
+The boilerplate is configured to use git hooks, which are scripts that fires when certain actions occur.
+
+There are various hooks types, and the one that is already integrated is the `pre-commit` hook. The project uses `husky` to execute scripts and `lint-staged` to run the scripts only on staged files. This allow us to analyze the files and decide if they can be commited or not. For example, the project is configured to run `ESLint` on those files, and if there exists syntax problems, the files can not be commited. It is true that the files can be automatically fixed with the `--fix` option, but I think it's best to let the developer manually solve the problem, so he learns why his code didn't pass the linter and to configure his IDE to enable the auto-format on save.
 
 ## Deployment
 
