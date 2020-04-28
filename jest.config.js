@@ -10,5 +10,6 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>/tests/schemas/',
     '<rootDir>/tests/matchers/',
+    '<rootDir>/tests/fixtures/',
   ],
 };

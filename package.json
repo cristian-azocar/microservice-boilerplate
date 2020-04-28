@@ -8,7 +8,8 @@
     "build": "tsc",
     "postbuild": "copyfiles -u 1 settings/default.yml dist/settings",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "lint": "eslint --fix \"**/*.{js,ts}\""
   },
   "keywords": [],
   "author": "",
@@ -23,7 +24,6 @@
     "@types/koa-bodyparser": "^4.3.0",
     "@types/koa-logger": "^3.1.1",
     "@types/koa-router": "^7.4.0",
-    "@types/koa-static": "^4.0.1",
     "@types/koa__cors": "^3.0.1",
     "@types/nconf": "^0.10.0",
     "@types/supertest": "^2.0.8",
@@ -56,9 +56,7 @@
     "koa-compose": "^4.1.0",
     "koa-logger": "^3.2.1",
     "koa-router": "^8.0.8",
-    "koa-static": "^5.0.0",
     "koa2-swagger-ui": "^3.0.0",
-    "nconf": "^0.10.0",
-    "swagger2-koa": "^2.0.0"
+    "nconf": "^0.10.0"
   }
 }
