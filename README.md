@@ -21,6 +21,7 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - [Request validation](#request-validation)
 - [API documentation](#api-documentation)
 - [CORS](#cors)
+- [Git Hooks](#git-hooks)
 - [Deployment](#deployment)
   - [Manual deploy](#manual-deploy)
   - [Deploy with Docker](#deploy-with-docker)
@@ -228,6 +229,12 @@ To see the documentation navigate to `http://localhost:3000/docs`
 ## CORS
 
 CORS is enabled thanks to the [koa-cors](https://github.com/koajs/cors) middleware. If you want to add rules, check the official documentation for more details.
+
+## Git Hooks
+
+The boilerplate is configured to use git hooks, which are scripts that fires when certain actions occur.
+
+There are various hooks types, and the one that is already integrated is the `pre-commit` hook. The project uses `husky` to execute scripts and `lint-staged` to run the scripts only on staged files. This allow us to analyze the files and decide if they can be commited or not. For example, the project is configured to run `ESLint` on those files, and if there exists syntax problems, the files can not be commited. It is true that the files can be automatically fixed with the `--fix` option, but I think it's best to let the developer manually solve the problem, so he learns why his code didn't pass the linter and to configure his IDE to enable the auto-format on save.
 
 ## Deployment
 
