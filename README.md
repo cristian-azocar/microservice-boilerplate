@@ -14,6 +14,8 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - [Running the microservice](#running-the-microservice)
 - [Running the tests](#running-the-tests)
   - [Unit tests](#unit-tests)
+    - [Mocks](#mocks)
+- [ESLint + Prettier](#eslint-+-prettier)
 - [Configuration variables](#configuration-variables)
 - [Module imports](#module-imports)
 - [Request validation](#request-validation)
