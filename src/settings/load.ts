@@ -3,6 +3,7 @@ import nconf from 'nconf';
 import yaml from 'js-yaml';
 
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
+const settingsPath = `../../settings`;
 
 // Default values have first priority
 nconf.defaults({
@@ -14,7 +15,7 @@ nconf.argv().env();
 
 // Files based on environment have third priority
 nconf.file({
-  file: path.join(__dirname, `${NODE_ENV}.yml`),
+  file: path.join(__dirname, `${settingsPath}/${NODE_ENV}.yml`),
   format: {
     parse: yaml.safeLoad,
     stringify: yaml.safeDump,
@@ -23,7 +24,7 @@ nconf.file({
 
 // Default file have the least priority
 nconf.file({
-  file: path.join(__dirname, 'default.yml'),
+  file: path.join(__dirname, `${settingsPath}/default.yml`),
   format: {
     parse: yaml.safeLoad,
     stringify: yaml.safeDump,
