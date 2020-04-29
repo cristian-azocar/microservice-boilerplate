@@ -3,22 +3,26 @@ describe('settings', (): void => {
     jest.resetModules();
   });
 
+  const getSettings = (): any => {
+    /* eslint-disable global-require */
+    require('settings/index');
+    return require('nconf');
+    /* eslint-enable global-require */
+  };
+
   it('should set NODE_ENV value to "development" when no value is configured', (): void => {
     delete process.env.NODE_ENV;
 
-    // eslint-disable-next-line global-require
-    const settings = require('settings/index').default;
-    const defaultValue = 'development';
+    const nconf = getSettings();
 
-    expect(settings.get('NODE_ENV')).toEqual(defaultValue);
+    expect(nconf.get('NODE_ENV')).toEqual('development');
   });
 
   it('should set NODE_ENV value to the configured in the environment variable', (): void => {
     process.env.NODE_ENV = 'production';
 
-    // eslint-disable-next-line global-require
-    const settings = require('settings/index').default;
+    const nconf = getSettings();
 
-    expect(settings.get('NODE_ENV')).toEqual(process.env.NODE_ENV);
+    expect(nconf.get('NODE_ENV')).toEqual(process.env.NODE_ENV);
   });
 });
