@@ -29,5 +29,3 @@ nconf.file({
     stringify: yaml.safeDump,
   },
 });
-
-export default nconf;
