@@ -57,7 +57,7 @@ You need to have installed the following tools:
 Clone the repository
 
 ```
-git clone https://github.com/CristianAzocar/microservice-boilerplate.git
+git clone https://github.com/cristian-azocar/microservice-boilerplate.git
 ```
 
 Install the dependencies (only needed if you don't want to use Docker)
