@@ -5,7 +5,7 @@ describe('settings', (): void => {
 
   const getSettings = (): any => {
     /* eslint-disable global-require */
-    require('settings/index');
+    require('src/settings/load');
     return require('nconf');
     /* eslint-enable global-require */
   };
