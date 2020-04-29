@@ -1,4 +1,4 @@
-import 'settings';
+import 'src/settings/load';
 import HealthService from 'src/services/health';
 import HealthInfo from 'src/models/responses/health';
 import healthInfoSchema from 'tests/schemas/health';
