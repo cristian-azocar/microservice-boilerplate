@@ -1,11 +1,11 @@
 import HealthInfo from 'src/models/responses/health';
-import Settings from 'settings';
+import nconf from 'nconf';
 
 export default class HealthService {
   async getHealthInfo(): Promise<HealthInfo> {
     return {
       nodeVersion: process.version,
-      service: Settings.get('SERVICE_NAME'),
+      service: nconf.get('SERVICE_NAME'),
       memory: process.memoryUsage(),
       pid: process.pid,
       uptime: process.uptime(),

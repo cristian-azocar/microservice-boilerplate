@@ -1,4 +1,5 @@
 import './utils/module-path-resolutor';
+import 'src/settings/load';
 import app from 'src/app';
 
 const port: number = +process.env.PORT || 3000;
