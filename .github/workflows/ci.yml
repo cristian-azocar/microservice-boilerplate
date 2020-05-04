@@ -1,0 +1,27 @@
+name: Node.js CI
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    paths-ignore:
+      - "*.md"
+
+jobs:
+  build:
+    name: Build the microservice
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build the microservice
+        run: npm run build
+      - name: Run unit tests
+        run: npm run test
