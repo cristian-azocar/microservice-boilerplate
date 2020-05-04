@@ -95,13 +95,19 @@ Run the microservice using Nodemon
 npm run dev
 ```
 
-Or using Docker
+Or using Docker Compose
 
 ```
 docker-compose up -d
 ```
 
-If for some reason you want to build the image manually, make sure to specify the development stage
+Alternatively, if you have Docker installed and want to see the microservice in action without installing anything, use the image uploaded in my repository
+
+```
+docker run -d -p 3000:3000 cazocar/node-microservice-boilerplate
+```
+
+If you want to build the image manually, make sure to specify the development stage
 
 ```
 docker build --target development .
@@ -281,12 +287,14 @@ Now, you can upload the image to [Docker Hub](https://hub.docker.com/) and then 
 
 ```
 # 1. Run this command on your local machine
-docker tag my-microservice your-company-name/my-microservice
-docker push your-company-name/my-microservice
+docker tag my-microservice your-docker-user/your-repository-name
+docker push your-docker-user/your-repository-name
 
 # 2. Run this command on your server
-docker pull your-company-name/my-microservice
+docker pull your-docker-user/your-repository-name
 ```
+
+**Note:** `your-docker-user` is the username of your Docker Hub account, and `your-repository-name` is the name of the repository created in Docker Hub. For more information on how to create a repository, [click here](https://docs.docker.com/docker-hub/repos/#creating-repositories).
 
 Or alternatively you can zip it and transfer the zipped file to your server and load it
 
@@ -303,6 +311,10 @@ docker load -i <path-to-image.zip>
 Finally, you can create and run a container with the image
 
 ```
+# If you uploaded the image to Docker Hub
+docker run -d -p 3000:3000 your-docker-user/your-repository-name
+
+# Or if you zipped the image
 docker run -d -p 3000:3000 my-microservice
 ```
 
