@@ -1,6 +1,7 @@
 # Microservice Boilerplate
 
 [![dependencies Status](https://david-dm.org/cristian-azocar/microservice-boilerplate/status.svg)](https://david-dm.org/cristian-azocar/microservice-boilerplate)
+[![Actions Status](https://github.com/cristian-azocar/microservice-boilerplate/workflows/Build%20and%20Test/badge.svg)](https://github.com/cristian-azocar/microservice-boilerplate/actions)
 
 A **highly opinionated** RESTful microservice boilerplate using [Node.js](https://nodejs.org/), [Koa](https://koajs.com/), [Typescript](https://www.typescriptlang.org/) and other awesome tools. It's main purpose is to speed the development of new microservices by providing an already configured project, using the best tools and a scalable code structure.
 
