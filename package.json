@@ -9,7 +9,8 @@
     "postbuild": "copyfiles -u 1 settings/default.yml dist/settings",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint --fix \"**/*.{js,ts}\""
+    "lint": "eslint \"**/*.{js,ts}\"",
+    "lint:fix": "eslint --fix \"**/*.{js,ts}\""
   },
   "keywords": [],
   "author": "",
