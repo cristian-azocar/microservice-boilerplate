@@ -22,6 +22,7 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - [API documentation](#api-documentation)
 - [CORS](#cors)
 - [Git Hooks](#git-hooks)
+- [CI/CD pipeline](#ci/cd-pipeline)
 - [Deployment](#deployment)
   - [Manual deploy](#manual-deploy)
   - [Deploy with Docker](#deploy-with-docker)
