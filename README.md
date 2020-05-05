@@ -253,17 +253,26 @@ There are various hooks types, and the one that is already integrated is the `pr
 
 ## CI/CD pipeline
 
-The project is configured to use GitHub Actions as a CI/CD service. The main reason to use this platform is that it is already integrated into the repository and for free, so there is no need to install or configure anything, just write your script and let GitHub worry for the rest.
+The project is configured to use GitHub Actions as a CI/CD service. The main reason to use this platform is that it is already integrated into the repository and for free, so there is no need to install or configure anything, just write your pipeline and let GitHub worry for the rest. You can find the pipelines in `.github/workflows`, where two files exists: `ci.yml` and `cd.yml`.
 
-You can find the script in `.github/workflows/ci.yml`, which basically does the following:
+The `ci.yml` pipeline is responsible for the `Continuous Integration` tasks and it does the following:
 
 - Checkout the `master` branch
 - Install Node.js
 - Install the dependencies
 - Build the project
+- Run the linter
 - Run the unit tests
 
-This actions are triggered whenever a `push` is made to any branch or when a new `pull request` is opened on the `master` branch.
+This actions are triggered whenever a `push` is made to any branch (except for `*.md` files), so that way we can know if there is a problem with the new changes as soon as posible.
+
+On the other hand, the `cd.yml` pipeline is responsible for the `Continuous Delivery` tasks and it does the following:
+
+- Checkout the `master` branch
+- Build a Docker image
+- Push the image to Docker Hub
+
+This actions are triggered whenever a `push` is made to the `master` branch and it affects files found in the `src` folder or in the `package.json` file, so it only executes when stable changes are ready to be deployed.
 
 ## Deployment
 
