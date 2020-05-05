@@ -180,6 +180,12 @@ In the [IDE configuration](#ide-configuration) section of the document it's spec
 npm run lint
 ```
 
+And if you want to automatically fix the problems
+
+```
+npm run lint:fix
+```
+
 ## Configuration variables
 
 The microservice is ready to read configuration variables so you can dynamically set parameters without having to re-build the application, either by command line arguments, environment variables, environment-specific files or a default file. All configuration files must be in [YAML](https://yaml.org/) format.
