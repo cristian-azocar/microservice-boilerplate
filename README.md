@@ -40,6 +40,7 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - Request validations using [joi](https://hapi.dev/module/joi/).
 - API documentation using the [OpenAPI](https://www.openapis.org/) specification and [Swagger](https://swagger.io/).
 - CORS support thanks to [koa-cors](https://github.com/koajs/cors) middleware.
+- CI/CD pipelines support using [GitHub Actions](https://github.com/features/actions).
 - And all of this in a [Docker](https://www.docker.com/) container.
 
 ## Getting started
@@ -241,6 +242,20 @@ CORS is enabled thanks to the [koa-cors](https://github.com/koajs/cors) middlewa
 The boilerplate is configured to use git hooks, which are scripts that fires when certain actions occur.
 
 There are various hooks types, and the one that is already integrated is the `pre-commit` hook. The project uses `husky` to execute scripts and `lint-staged` to run the scripts only on staged files. This allow us to analyze the files and decide if they can be commited or not. For example, the project is configured to run `ESLint` on those files, and if there exists syntax problems, the files can not be commited. It is true that the files can be automatically fixed with the `--fix` option, but I think it's best to let the developer manually solve the problem, so he learns why his code didn't pass the linter and to configure his IDE to enable the auto-format on save.
+
+## CI/CD pipeline
+
+The project is configured to use GitHub Actions as a CI/CD service. The main reason to use this platform is that it is already integrated into the repository and for free, so there is no need to install or configure anything, just write your script and let GitHub worry for the rest.
+
+You can find the script in `.github/workflows/ci.yml`, which basically does the following:
+
+- Checkout the `master` branch
+- Install Node.js
+- Install the dependencies
+- Build the project
+- Run the unit tests
+
+This actions are triggered whenever a `push` is made to any branch or when a new `pull request` is opened on the `master` branch.
 
 ## Deployment
 
