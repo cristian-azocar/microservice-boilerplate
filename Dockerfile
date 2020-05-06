@@ -6,7 +6,7 @@ FROM base AS development
 ENV NODE_ENV=development
 RUN npm install
 COPY . .
-CMD ["npm", "run", "dev"]
+CMD ["nodemon", "src/server.ts"]
 
 FROM development AS builder
 RUN npm run build
