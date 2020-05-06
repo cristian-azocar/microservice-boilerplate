@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/src/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "postbuild": "copyfiles -u 1 settings/default.yml dist/settings",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint \"**/*.{js,ts}\"",
-    "lint:fix": "eslint --fix \"**/*.{js,ts}\""
+    "lint:fix": "eslint --fix \"**/*.{js,ts}\"",
+    "docker:build": "docker build -t microservice-boilerplate .",
+    "docker:run": "docker run -d -p 3000:3000 --name microservice-boilerplate microservice-boilerplate"
   },
   "keywords": [],
   "author": "",
