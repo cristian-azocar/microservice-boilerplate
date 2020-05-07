@@ -272,6 +272,8 @@ On the other hand, the `cd.yml` pipeline is responsible for the `Continuous Deli
 - Build a Docker image
 - Push the image to Docker Hub
 
+**Important:** Remember to change the Docker Hub repository name and store your credentials in the `Secrets` section of your GitHub repository configuration (`Settings > Secrets`).
+
 This actions are triggered whenever a `push` is made to the `master` branch and it affects files found in the `src` folder or in the `package.json` file, so it only executes when stable changes are ready to be deployed.
 
 ## Deployment
