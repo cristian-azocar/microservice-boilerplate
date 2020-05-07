@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_and_test:
-    name: Build the microservice
+    name: Build the project
     runs-on: ubuntu-latest
     steps:
       - name: Checkout master
@@ -18,7 +18,7 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: npm ci
-      - name: Build the microservice
+      - name: Build the project
         run: npm run build
       - name: Run linter
         run: npm run lint
