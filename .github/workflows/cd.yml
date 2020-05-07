@@ -29,8 +29,8 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@v2
       - name: Login to Heroku Container Registry
-        uses: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
+        run: docker login --username=_ --password=${{ secrets.HEROKU_API_KEY }} registry.heroku.com
       - name: Build image
-        uses: docker build -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web .
+        run: docker build -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web .
       - name: Push image
-        uses: docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
+        run: docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
