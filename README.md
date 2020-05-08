@@ -8,6 +8,7 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 ## Table of contents
 
 - [What is included in this boilerplate?](#what-is-included-in-this-boilerplate?)
+- [Live demo](#live-demo)
 - [Getting started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installing](#installing)
@@ -44,6 +45,22 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - CORS support thanks to [koa-cors](https://github.com/koajs/cors) middleware.
 - CI/CD pipelines support using [GitHub Actions](https://github.com/features/actions).
 - And all of this in a [Docker](https://www.docker.com/) container.
+
+## Live demo
+
+You can see a live demo in the following link:
+
+https://microservice-boilerplate.herokuapp.com
+
+The demo is deployed in Heroku and it includes the following endpoints:
+
+| Endpoint | Method | Description                                         |
+| -------- | ------ | --------------------------------------------------- |
+| /health  | GET    | Gets the health information of the microservice     |
+| /docs    | GET    | Gets the API documentation rendered with Swagger UI |
+| /login   | POST   | Logs a user in the system                           |
+
+For more information about the endpoints, go to the [API documentation](https://microservice-boilerplate.herokuapp.com/docs).
 
 ## Getting started
 
