@@ -21,6 +21,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: cazocar/node-microservice-boilerplate
+          tags: latest
 
   deploy_to_heroku:
     name: Deploy to Heroku
