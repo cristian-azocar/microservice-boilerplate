@@ -35,3 +35,5 @@ jobs:
         run: docker build -t registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web .
       - name: Push image
         run: docker push registry.heroku.com/${{ secrets.HEROKU_APP_NAME }}/web
+      - name: Release image
+        run: heroku container:release web --app ${{ secrets.HEROKU_APP_NAME }}
