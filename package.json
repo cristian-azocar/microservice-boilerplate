@@ -14,7 +14,7 @@
     "lint:fix": "eslint --fix \"**/*.{js,ts}\"",
     "docker:build": "docker build -t microservice-boilerplate .",
     "docker:run": "docker run -d -p 3000:3000 --name microservice-boilerplate microservice-boilerplate",
-    "delete:this": "dummy script to test the pipeline (2)"
+    "delete:this": "dummy script to test the pipeline (3)"
   },
   "keywords": [],
   "author": "",
