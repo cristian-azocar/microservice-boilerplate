@@ -338,15 +338,21 @@ The Dockerfile has a multi-stage configuration to be used during development as 
 To build the image in production mode, you only have to run the following command
 
 ```
-# Build the image
-docker build -t my-microservice .
-
-# Remove "development" intermediate image
-# This step is optional, but nobody likes garbage, right?
-docker image prune -f
+npm run docker:build
 ```
 
-**Note:** The tag `my-microservice` is an example, use whatever name you like.
+Or if you prefer to do it manually, run the following command
+
+```
+# 1. Build the image
+docker build -t microservice-boilerplate .
+
+# 2. Remove "development" intermediate image
+# This step is optional, but nobody likes garbage, right?
+docker image prune -f --filter label=stage=intermediate
+```
+
+**Note:** The tag `microservice-boilerplate` is an example, use whatever name you like.
 
 This will create an image with the code transpiled to plain Javascript and with only the needed dependencies. The production stage is the last one, so we don't have to specify the `--target` option.
 
@@ -354,7 +360,7 @@ Now, you can upload the image to [Docker Hub](https://hub.docker.com/) and then 
 
 ```
 # 1. Run this command on your local machine
-docker tag my-microservice your-docker-user/your-repository-name
+docker tag microservice-boilerplate your-docker-user/your-repository-name
 docker push your-docker-user/your-repository-name
 
 # 2. Run this command on your server
@@ -367,7 +373,7 @@ Or alternatively you can zip it and transfer the zipped file to your server and 
 
 ```
 # 1. Run this command on your local machine
-docker save -o my-microservice.zip my-microservice
+docker save -o microservice-boilerplate.zip microservice-boilerplate
 
 # 2. Transfer the zipped file to your server
 
@@ -382,7 +388,7 @@ Finally, you can create and run a container with the image
 docker run -d -p 3000:3000 your-docker-user/your-repository-name
 
 # Or if you zipped the image
-docker run -d -p 3000:3000 my-microservice
+docker run -d -p 3000:3000 microservice-boilerplate
 ```
 
 ## Built with
