@@ -1,6 +1,6 @@
 import LoginService from 'src/services/login';
 import LoginResponse from 'src/models/responses/login';
-import users from 'tests/fixtures/users';
+import users from 'tests/unit/fixtures/users';
 
 function LoginServiceMock(): Partial<LoginService> {
   return {
