@@ -101,7 +101,8 @@ If you are using [Visual Studio Code](https://code.visualstudio.com/), follow th
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
 ```
 
