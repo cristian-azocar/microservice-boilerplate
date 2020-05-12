@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ['<rootDir>/tests'],
+  roots: ['<rootDir>/tests/unit'],
   preset: 'ts-jest',
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   moduleNameMapper: {
@@ -7,8 +7,8 @@ module.exports = {
     'tests/(.*)': '<rootDir>/tests/$1',
   },
   testPathIgnorePatterns: [
-    '<rootDir>/tests/schemas/',
-    '<rootDir>/tests/matchers/',
-    '<rootDir>/tests/fixtures/',
+    '<rootDir>/tests/unit/schemas/',
+    '<rootDir>/tests/unit/matchers/',
+    '<rootDir>/tests/unit/fixtures/',
   ],
 };
