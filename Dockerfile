@@ -3,6 +3,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 FROM base AS development
+LABEL stage=intermediate
 ENV NODE_ENV=development
 RUN npm install
 COPY . .
