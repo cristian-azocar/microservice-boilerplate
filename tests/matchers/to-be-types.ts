@@ -26,7 +26,7 @@ expect.extend({
 
     return {
       pass: true,
-      message: (): string => `Ok`,
+      message: (): string => 'Ok',
     };
   },
 });
