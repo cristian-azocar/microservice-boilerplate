@@ -321,7 +321,15 @@ If you want to manually deploy the microservice, first transpile the typescript 
 npm run build
 ```
 
-This will create a `dist` folder with the code transpiled to Javascript. Copy that folder, the `package.json` and the `package-lock.json` files, and put them wherever you are going to make the deploy.
+This will create a `dist` folder with the code transpiled to Javascript. Now you have to copy the following files and folders:
+
+- `dist`
+- `package.json`
+- `package-lock.json`
+- `settings`
+- `docs`
+
+And then put them wherever you are going to make the deploy.
 
 Now, install the dependencies where you copied the files.
 
