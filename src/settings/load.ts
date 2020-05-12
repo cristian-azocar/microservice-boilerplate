@@ -3,7 +3,7 @@ import nconf from 'nconf';
 import yaml from 'js-yaml';
 
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
-const settingsPath = `../../settings`;
+const settingsPath = '../../settings';
 
 // Default values have first priority
 nconf.defaults({
