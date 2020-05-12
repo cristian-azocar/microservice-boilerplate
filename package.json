@@ -7,7 +7,7 @@
     "start": "node dist/src/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "postbuild": "copyfiles -u 1 settings/default.yml dist/settings",
+    "postbuild": "copyfiles settings/**/*.* dist",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint \"**/*.{js,ts}\"",
