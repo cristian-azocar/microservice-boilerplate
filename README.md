@@ -339,6 +339,12 @@ npm install --production
 
 Finally, use a process manager or a web server to run and manage the microservice. I recommend using [pm2](https://pm2.keymetrics.io/).
 
+If you want to manually start it, run the following command
+
+```
+npm run start
+```
+
 ### Deploy with Docker
 
 The Dockerfile has a multi-stage configuration to be used during development as well in production.
