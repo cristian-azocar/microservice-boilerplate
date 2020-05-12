@@ -9,6 +9,7 @@
     "build": "tsc",
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:integration": "jest --config=tests/integration/jest.config.js",
     "lint": "eslint \"**/*.{js,ts}\"",
     "lint:fix": "eslint --fix \"**/*.{js,ts}\"",
     "docker:build": "docker build -t microservice-boilerplate .",
