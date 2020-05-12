@@ -2,11 +2,10 @@ import { Middleware } from 'koa';
 import koaSwagger from 'koa2-swagger-ui';
 import yaml from 'js-yaml';
 import fs from 'fs';
-import path from 'path';
 import jsonRefs from 'json-refs';
 
 export default class ApiDocsUtils {
-  private openApiPath = path.join(__dirname, '../../docs/index.yaml');
+  private openApiPath = './docs/index.yaml';
   private jsonRefsOptions: jsonRefs.JsonRefsOptions = {
     location: this.openApiPath,
     loaderOptions: {
