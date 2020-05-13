@@ -122,19 +122,30 @@ Or using Docker Compose
 docker-compose up -d
 ```
 
-Alternatively, if you have Docker installed and want to see the microservice in action without installing anything, use the image uploaded in my repository
+Alternatively, if you have Docker installed and want to see the microservice in action without installing anything else, use the image uploaded in my Docker Hub repository
 
 ```
 docker run -d -p 3000:3000 cazocar/node-microservice-boilerplate
 ```
 
-If you want to build the image manually, make sure to specify the development stage
-
-```
-docker build --target development .
-```
-
 **Note:** By default, the microservice uses the port 3000.
+
+If you want to build and run the image manually, make sure to specify the development stage and don't forget to create a volume so any local change you make will be reflected in the container
+
+```
+# 1. Build the image
+docker build --target development -t microservice-boilerplate .
+
+# 2. Run a new container with a mounted volume
+docker run -d -p 3000:3000 --name microservice-boilerplate -v $(pwd):/usr/src/app -v /usr/src/app/node_modules microservice-boilerplate
+```
+
+**Note:** if you are using Powershell, replace `$(pwd)` by `${pwd}`.
+
+Let's see a brief explanation of the volume mount in the second command:
+
+- `-v $(pwd):/usr/src/app`: we are telling Docker to mount a volume between `$(pwd)` (which is the current directory of our computer) and `/usr/src/app` (which is the directory were our code lives inside the container), so that way any change made to the files located in our computer will be applied to the container, without the need to re-build the image.
+- `-v /usr/src/app/node_modules`: we are telling Docker to not map the `node_modules` folder inside the container, so that way our local `node_modules` folder (who should not even exist or at least be empty) will not override the one in the container.
 
 The `docker-compose` file exists because is so much cleaner to have a YAML file with the configuration to build and run a container, than to have to write a very long script. Also, you only have to type a very short command to start it.
 Note that the `docker-compose` file is only meant to be used during development.
@@ -207,16 +218,19 @@ npm run lint:fix
 
 ## Configuration variables
 
-The microservice is ready to read configuration variables so you can dynamically set parameters without having to re-build the application, either by command line arguments, environment variables, environment-specific files or a default file. All configuration files must be in [YAML](https://yaml.org/) format.
+The microservice is ready to read configuration variables so you can dynamically set parameters without having to re-build the application, either by a local file, command line arguments, environment variables, environment-specific files or a default file. All configuration files must be in [YAML](https://yaml.org/) format.
 
 It uses a configuration source based on a hierarchically order, which is a `nconf` feature. This means that some configurations will have a higher priority over the others and will override them. For example, if you set the same two variables in a `default.yml` file and the other on a environment variable, the later one will be used, because environment variables have higher priority. This is really useful when you want to set default values and give the option to override them, or when you want to have different configuration files depending on the environment the service is running (development, production, etc).
 
 The hierarchical order of priority is as follows
 
+- Local configuration file (`local.yml`)
 - Command line arguments
 - Environment variables
 - Environment-specific file (`development.yml`, `production.yml`, etc)
 - Default file (`default.yml`)
+
+The `local.yml` file have the maximum priority as its meant to easily change the configuration while developing.
 
 The environment-specific file name is built based on the `NODE_ENV` environment variable value. For example, if your `NODE_ENV` value is `staging`, then the microservice will search for a file named `staging.yml`.
 
@@ -331,6 +345,8 @@ This will create a `dist` folder with the code transpiled to Javascript. Now you
 - `docs`
 
 And then put them wherever you are going to make the deploy.
+
+**Important:** Remember to not copy the `local.yml` file or it will override any other configuration specific for your deployment environment, as its only meant for development purposes. If you need to do some configuration specific to your environment (for example, you need to change the URL of some external API in production), it's highly recommended that you use the environment-specific file (in the previous example, use the `production.yml` file if your `NODE_ENV` variable is set to `production`).
 
 Now, install the dependencies where you copied the files.
 
