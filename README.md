@@ -314,6 +314,9 @@ The `ci.yml` pipeline is responsible for the `Continuous Integration` tasks and 
 - Build the project
 - Run the linter
 - Run the unit tests
+- Build the Docker image
+- Run a Docker container using the previous image
+- Run the integration tests on the previous Docker container
 
 This actions are triggered whenever a `push` is made to any branch (except for `*.md` files), so that way we can know if there is a problem with the new changes as soon as posible.
 
