@@ -1,7 +1,7 @@
-import 'tests/mocks/controllers/login';
+import 'tests/unit/mocks/controllers/login';
 import supertest, { SuperTest, Test, Response } from 'supertest';
 import app from 'src/app';
-import loginSchema from 'tests/schemas/login';
+import loginSchema from 'tests/unit/schemas/login';
 
 const appTest: SuperTest<Test> = supertest(app.callback());
 

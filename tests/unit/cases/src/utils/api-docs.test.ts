@@ -1,4 +1,4 @@
-import 'tests/mocks/node-modules/mock-all';
+import 'tests/unit/mocks/node-modules/mock-all';
 import { Middleware } from 'koa';
 import ApiDocsUtils from 'src/utils/api-docs';
 
