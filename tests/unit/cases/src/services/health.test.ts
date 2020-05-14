@@ -1,7 +1,7 @@
 import 'src/settings/load';
 import HealthService from 'src/services/health';
 import HealthInfo from 'src/models/responses/health';
-import healthInfoSchema from 'tests/unit/schemas/health';
+import healthInfoSchema from 'tests/schemas/health';
 
 describe('health service', (): void => {
   it('should return the service health', async (): Promise<void> => {

@@ -2,7 +2,7 @@ import 'tests/unit/mocks/services/health';
 import { Context } from 'koa';
 import { createMockContext } from '@shopify/jest-koa-mocks';
 import HealthController from 'src/controllers/health';
-import healthInfoSchema from 'tests/unit/schemas/health';
+import healthInfoSchema from 'tests/schemas/health';
 
 describe('health controllers', (): void => {
   afterAll((): void => {
