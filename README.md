@@ -92,6 +92,9 @@ The project is configured to use ESLint, Prettier and EditorConfig to format de 
 
 If you are using [Visual Studio Code](https://code.visualstudio.com/), follow this steps:
 
+- Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+- Install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
+- Install the [EditorConfig extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
 - Open the command palette with `CTRL + SHIFT + P`
 - Type `open settings` and select `Open Workspace Settings (JSON)`
 - A JSON file will open. Copy and paste the following:
