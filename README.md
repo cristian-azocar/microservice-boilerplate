@@ -155,6 +155,18 @@ Note that the `docker-compose` file is only meant to be used during development.
 
 ## Running the tests
 
+The project is configured to run unit and integration tests using Jest. The structure of the `tests` folder is as follow:
+
+- `unit`: this is the root folder for the unit tests.
+- `unit/cases`: all the unit tests goes here and are ordered based on the project folder structure. For example, all controllers tests goes in `tests/unit/cases/src/controllers`.
+- `unit/fixtures`: the data shared by the tests which simulate external sources. For example, to simulate the data obtained from a database or an external API, it can be stored here.
+- `unit/matchers`: the custom matchers used to make assertions. For example, to create a matcher to verify that an object has certain types, it can be stored here.
+- `unit/mocks`: the mocks of custom modules or from the `node_modules` folder. Basically here we can change the behaviour of the modules to isolate our tests.
+- `unit/schemas`: the schemas which describes the structure of an object. It's used to assert that an object has a valid structure.
+- `integration`: this is the root folder for the integration tests.
+- `integration/cases`: all the integration tests goes here.
+- `integration/jest.config.js`: corresponds to the Jest configuration specific for this type of tests.
+
 ### Unit tests
 
 The unit tests are executed with Jest and they cover the server, routes, controllers, middlewares, among other modules. The project also includes coverage test.
@@ -172,14 +184,6 @@ npm run test:coverage
 ```
 
 **Note:** To see the detailed results of the coverage, open the file found in `coverage/lcov-report/index.html`.
-
-The structure of the `tests` folder is as follow:
-
-- `cases`: all the tests goes here and are ordered based on the project folder structure. For example, all controllers tests goes in `tests/cases/src/controllers`.
-- `fixtures`: the data shared by the tests which simulate external sources. For example, to simulate the data obtained from a database or an external API, it can be stored here.
-- `matchers`: the custom matchers used to make assertions. For example, to create a matcher to verify that an object has certain types, it can be stored here.
-- `mocks`: the mocks of custom modules or from the `node_modules` folder. Basically here we can change the behaviour of the modules to isolate our tests.
-- `schemas`: the schemas which describes the structure of an object. It's used to assert that an object has a valid structure.
 
 #### Mocks
 
@@ -202,6 +206,18 @@ afterAll((): void => {
 Some modules in the `node_modules` folder are also mocked, and can be imported one by one, or by only importing `tests/mocks/node-modules/mock-all`. If you create new mocks, be sure to keep that file up to date.
 
 Another thing to notice, is that the mocks constructors are declared using the `function()` syntax, because calling `new` in arrow functions [is not allowed in JavaScript](https://jestjs.io/docs/en/es6-class-mocks#mock-using-module-factory-parameter).
+
+### Integration tests
+
+The integration tests are used to test that all components of the microservice works as a whole. This can be done by making HTTP calls to the API as it were a client trying to consume the microservice.
+
+The tests uses the URL configured in the `APP_URL` settings, so that way they can be run pointing to a specific environment. In the case of the CI pipeline, it points to `localhost` because the pipeline runs a Docker container.
+
+Run the integration tests
+
+```
+npm run test:integration
+```
 
 ## ESLint + Prettier
 
