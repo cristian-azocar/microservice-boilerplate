@@ -1,7 +1,7 @@
-import 'tests/mocks/controllers/health';
+import 'tests/unit/mocks/controllers/health';
 import supertest, { SuperTest, Test, Response } from 'supertest';
 import app from 'src/app';
-import healthInfoSchema from 'tests/schemas/health';
+import healthInfoSchema from 'tests/unit/schemas/health';
 
 const appTest: SuperTest<Test> = supertest(app.callback());
 

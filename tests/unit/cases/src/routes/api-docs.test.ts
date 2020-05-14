@@ -1,4 +1,4 @@
-import 'tests/mocks/utils/api-docs';
+import 'tests/unit/mocks/utils/api-docs';
 import supertest, { SuperTest, Test, Response } from 'supertest';
 import app from 'src/app';
 

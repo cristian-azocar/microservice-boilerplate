@@ -92,6 +92,9 @@ The project is configured to use ESLint, Prettier and EditorConfig to format de 
 
 If you are using [Visual Studio Code](https://code.visualstudio.com/), follow this steps:
 
+- Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+- Install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
+- Install the [EditorConfig extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
 - Open the command palette with `CTRL + SHIFT + P`
 - Type `open settings` and select `Open Workspace Settings (JSON)`
 - A JSON file will open. Copy and paste the following:
@@ -101,7 +104,8 @@ If you are using [Visual Studio Code](https://code.visualstudio.com/), follow th
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
 ```
 
@@ -121,24 +125,47 @@ Or using Docker Compose
 docker-compose up -d
 ```
 
-Alternatively, if you have Docker installed and want to see the microservice in action without installing anything, use the image uploaded in my repository
+Alternatively, if you have Docker installed and want to see the microservice in action without installing anything else, use the image uploaded in my Docker Hub repository
 
 ```
 docker run -d -p 3000:3000 cazocar/node-microservice-boilerplate
 ```
 
-If you want to build the image manually, make sure to specify the development stage
-
-```
-docker build --target development .
-```
-
 **Note:** By default, the microservice uses the port 3000.
+
+If you want to build and run the image manually, make sure to specify the development stage and don't forget to create a volume so any local change you make will be reflected in the container
+
+```
+# 1. Build the image
+docker build --target development -t microservice-boilerplate .
+
+# 2. Run a new container with a mounted volume
+docker run -d -p 3000:3000 --name microservice-boilerplate -v $(pwd):/usr/src/app -v /usr/src/app/node_modules microservice-boilerplate
+```
+
+**Note:** if you are using Powershell, replace `$(pwd)` by `${pwd}`.
+
+Let's see a brief explanation of the volume mount in the second command:
+
+- `-v $(pwd):/usr/src/app`: we are telling Docker to mount a volume between `$(pwd)` (which is the current directory of our computer) and `/usr/src/app` (which is the directory were our code lives inside the container), so that way any change made to the files located in our computer will be applied to the container, without the need to re-build the image.
+- `-v /usr/src/app/node_modules`: we are telling Docker to not map the `node_modules` folder inside the container, so that way our local `node_modules` folder (who should not even exist or at least be empty) will not override the one in the container.
 
 The `docker-compose` file exists because is so much cleaner to have a YAML file with the configuration to build and run a container, than to have to write a very long script. Also, you only have to type a very short command to start it.
 Note that the `docker-compose` file is only meant to be used during development.
 
 ## Running the tests
+
+The project is configured to run unit and integration tests using Jest. The structure of the `tests` folder is as follow:
+
+- `unit`: this is the root folder for the unit tests.
+- `unit/cases`: all the unit tests goes here and are ordered based on the project folder structure. For example, all controllers tests goes in `tests/unit/cases/src/controllers`.
+- `unit/fixtures`: the data shared by the tests which simulate external sources. For example, to simulate the data obtained from a database or an external API, it can be stored here.
+- `unit/matchers`: the custom matchers used to make assertions. For example, to create a matcher to verify that an object has certain types, it can be stored here.
+- `unit/mocks`: the mocks of custom modules or from the `node_modules` folder. Basically here we can change the behaviour of the modules to isolate our tests.
+- `unit/schemas`: the schemas which describes the structure of an object. It's used to assert that an object has a valid structure.
+- `integration`: this is the root folder for the integration tests.
+- `integration/cases`: all the integration tests goes here.
+- `integration/jest.config.js`: corresponds to the Jest configuration specific for this type of tests.
 
 ### Unit tests
 
@@ -157,14 +184,6 @@ npm run test:coverage
 ```
 
 **Note:** To see the detailed results of the coverage, open the file found in `coverage/lcov-report/index.html`.
-
-The structure of the `tests` folder is as follow:
-
-- `cases`: all the tests goes here and are ordered based on the project folder structure. For example, all controllers tests goes in `tests/cases/src/controllers`.
-- `fixtures`: the data shared by the tests which simulate external sources. For example, to simulate the data obtained from a database or an external API, it can be stored here.
-- `matchers`: the custom matchers used to make assertions. For example, to create a matcher to verify that an object has certain types, it can be stored here.
-- `mocks`: the mocks of custom modules or from the `node_modules` folder. Basically here we can change the behaviour of the modules to isolate our tests.
-- `schemas`: the schemas which describes the structure of an object. It's used to assert that an object has a valid structure.
 
 #### Mocks
 
@@ -188,6 +207,18 @@ Some modules in the `node_modules` folder are also mocked, and can be imported o
 
 Another thing to notice, is that the mocks constructors are declared using the `function()` syntax, because calling `new` in arrow functions [is not allowed in JavaScript](https://jestjs.io/docs/en/es6-class-mocks#mock-using-module-factory-parameter).
 
+### Integration tests
+
+The integration tests are used to test that all components of the microservice works as a whole. This can be done by making HTTP calls to the API as it were a client trying to consume the microservice.
+
+The tests uses the URL configured in the `APP_URL` settings, so that way they can be run pointing to a specific environment. In the case of the CI pipeline, it points to `localhost` because the pipeline runs a Docker container.
+
+Run the integration tests
+
+```
+npm run test:integration
+```
+
 ## ESLint + Prettier
 
 The project uses ESLint and Prettier to analyze, format and find problems in the code. The rules are based on the [Airbnb configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb), but further customization can be done in the `.eslintrc.json` file.
@@ -206,16 +237,19 @@ npm run lint:fix
 
 ## Configuration variables
 
-The microservice is ready to read configuration variables so you can dynamically set parameters without having to re-build the application, either by command line arguments, environment variables, environment-specific files or a default file. All configuration files must be in [YAML](https://yaml.org/) format.
+The microservice is ready to read configuration variables so you can dynamically set parameters without having to re-build the application, either by a local file, command line arguments, environment variables, environment-specific files or a default file. All configuration files must be in [YAML](https://yaml.org/) format.
 
 It uses a configuration source based on a hierarchically order, which is a `nconf` feature. This means that some configurations will have a higher priority over the others and will override them. For example, if you set the same two variables in a `default.yml` file and the other on a environment variable, the later one will be used, because environment variables have higher priority. This is really useful when you want to set default values and give the option to override them, or when you want to have different configuration files depending on the environment the service is running (development, production, etc).
 
 The hierarchical order of priority is as follows
 
+- Local configuration file (`local.yml`)
 - Command line arguments
 - Environment variables
 - Environment-specific file (`development.yml`, `production.yml`, etc)
 - Default file (`default.yml`)
+
+The `local.yml` file have the maximum priority as its meant to easily change the configuration while developing.
 
 The environment-specific file name is built based on the `NODE_ENV` environment variable value. For example, if your `NODE_ENV` value is `staging`, then the microservice will search for a file named `staging.yml`.
 
@@ -280,6 +314,9 @@ The `ci.yml` pipeline is responsible for the `Continuous Integration` tasks and 
 - Build the project
 - Run the linter
 - Run the unit tests
+- Build the Docker image
+- Run a Docker container using the previous image
+- Run the integration tests on the previous Docker container
 
 This actions are triggered whenever a `push` is made to any branch (except for `*.md` files), so that way we can know if there is a problem with the new changes as soon as posible.
 
@@ -321,7 +358,17 @@ If you want to manually deploy the microservice, first transpile the typescript 
 npm run build
 ```
 
-This will create a `dist` folder with the code transpiled to Javascript. Copy that folder, the `package.json` and the `package-lock.json` files, and put them wherever you are going to make the deploy.
+This will create a `dist` folder with the code transpiled to Javascript. Now you have to copy the following files and folders:
+
+- `dist`
+- `package.json`
+- `package-lock.json`
+- `settings`
+- `docs`
+
+And then put them wherever you are going to make the deploy.
+
+**Important:** Remember to not copy the `local.yml` file or it will override any other configuration specific for your deployment environment, as its only meant for development purposes. If you need to do some configuration specific to your environment (for example, you need to change the URL of some external API in production), it's highly recommended that you use the environment-specific file (in the previous example, use the `production.yml` file if your `NODE_ENV` variable is set to `production`).
 
 Now, install the dependencies where you copied the files.
 
@@ -331,6 +378,12 @@ npm install --production
 
 Finally, use a process manager or a web server to run and manage the microservice. I recommend using [pm2](https://pm2.keymetrics.io/).
 
+If you want to manually start it, run the following command
+
+```
+npm run start
+```
+
 ### Deploy with Docker
 
 The Dockerfile has a multi-stage configuration to be used during development as well in production.
@@ -338,15 +391,21 @@ The Dockerfile has a multi-stage configuration to be used during development as 
 To build the image in production mode, you only have to run the following command
 
 ```
-# Build the image
-docker build -t my-microservice .
-
-# Remove "development" intermediate image
-# This step is optional, but nobody likes garbage, right?
-docker image prune -f
+npm run docker:build
 ```
 
-**Note:** The tag `my-microservice` is an example, use whatever name you like.
+Or if you prefer to do it manually, run the following command
+
+```
+# 1. Build the image
+docker build -t microservice-boilerplate .
+
+# 2. Remove "development" intermediate image
+# This step is optional, but nobody likes garbage, right?
+docker image prune -f --filter label=stage=intermediate
+```
+
+**Note:** The tag `microservice-boilerplate` is an example, use whatever name you like.
 
 This will create an image with the code transpiled to plain Javascript and with only the needed dependencies. The production stage is the last one, so we don't have to specify the `--target` option.
 
@@ -354,7 +413,7 @@ Now, you can upload the image to [Docker Hub](https://hub.docker.com/) and then 
 
 ```
 # 1. Run this command on your local machine
-docker tag my-microservice your-docker-user/your-repository-name
+docker tag microservice-boilerplate your-docker-user/your-repository-name
 docker push your-docker-user/your-repository-name
 
 # 2. Run this command on your server
@@ -367,7 +426,7 @@ Or alternatively you can zip it and transfer the zipped file to your server and 
 
 ```
 # 1. Run this command on your local machine
-docker save -o my-microservice.zip my-microservice
+docker save -o microservice-boilerplate.zip microservice-boilerplate
 
 # 2. Transfer the zipped file to your server
 
@@ -382,7 +441,7 @@ Finally, you can create and run a container with the image
 docker run -d -p 3000:3000 your-docker-user/your-repository-name
 
 # Or if you zipped the image
-docker run -d -p 3000:3000 my-microservice
+docker run -d -p 3000:3000 microservice-boilerplate
 ```
 
 ## Built with

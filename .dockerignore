@@ -4,3 +4,4 @@ Dockerfile
 .git
 .vscode
 coverage
+settings/local.yml
