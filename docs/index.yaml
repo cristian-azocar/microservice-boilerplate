@@ -6,6 +6,8 @@ info:
 servers:
   - url: http://localhost:3000
     description: Development server
+  - url: https://microservice-boilerplate.herokuapp.com
+    description: Production server
 
 paths:
   /health:
