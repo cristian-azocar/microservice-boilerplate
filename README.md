@@ -150,8 +150,7 @@ Let's see a brief explanation of the volume mount in the second command:
 - `-v $(pwd):/usr/src/app`: we are telling Docker to mount a volume between `$(pwd)` (which is the current directory of our computer) and `/usr/src/app` (which is the directory were our code lives inside the container), so that way any change made to the files located in our computer will be applied to the container, without the need to re-build the image.
 - `-v /usr/src/app/node_modules`: we are telling Docker to not map the `node_modules` folder inside the container, so that way our local `node_modules` folder (who should not even exist or at least be empty) will not override the one in the container.
 
-The `docker-compose` file exists because is so much cleaner to have a YAML file with the configuration to build and run a container, than to have to write a very long script. Also, you only have to type a very short command to start it.
-Note that the `docker-compose` file is only meant to be used during development.
+The `docker-compose` file exists because is so much cleaner to have a YAML file with the configuration to build and run a container, than to have to write a very long script. Also, you only have to type a very short command to start it and it already takes care of creating the container if it not exists or just runs it if it already exists. Note that the `docker-compose` file is only meant to be used during development.
 
 ## Running the tests
 
