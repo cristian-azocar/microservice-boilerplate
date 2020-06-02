@@ -5,3 +5,4 @@ Dockerfile
 .vscode
 coverage
 settings/local.yml
+TODO.txt
