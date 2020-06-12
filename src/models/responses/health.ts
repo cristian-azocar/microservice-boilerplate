@@ -1,3 +1,8 @@
+interface Package {
+  name: string;
+  version: string;
+}
+
 export default interface HealthInfo {
   nodeVersion: string;
   service: string;
@@ -5,6 +10,5 @@ export default interface HealthInfo {
   pid: number;
   uptime: number;
   environment: string;
-  appPackage: string;
-  appVersionPackage: string;
+  package: Package;
 }
