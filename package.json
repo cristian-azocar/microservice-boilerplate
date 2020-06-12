@@ -59,7 +59,7 @@
     "koa-bodyparser": "^4.3.0",
     "koa-compose": "^4.1.0",
     "koa-logger": "^3.2.1",
-    "koa-router": "^8.0.8",
+    "koa-router": "^9.0.1",
     "koa2-swagger-ui": "^3.0.0",
     "nconf": "^0.10.0"
   }
