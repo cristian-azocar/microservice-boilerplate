@@ -1,5 +1,6 @@
 import HealthInfo from 'src/models/responses/health';
 import nconf from 'nconf';
+import pkg from 'package.json';
 
 export default class HealthService {
   async getHealthInfo(): Promise<HealthInfo> {
@@ -10,8 +11,10 @@ export default class HealthService {
       pid: process.pid,
       uptime: process.uptime(),
       environment: process.env.NODE_ENV,
-      appPackage: process.env.npm_package_name,
-      appVersionPackage: process.env.npm_package_version,
+      package: {
+        name: pkg.name,
+        version: pkg.version,
+      },
     };
   }
 }

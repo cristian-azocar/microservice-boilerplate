@@ -17,5 +17,5 @@ ENV NODE_ENV=production
 RUN npm ci --production
 COPY --from=builder /usr/src/app/settings ./settings
 COPY --from=builder /usr/src/app/docs ./docs
-COPY --from=builder /usr/src/app/dist .
+COPY --from=builder /usr/src/app/dist/src ./src
 CMD ["node", "src/server.js"]

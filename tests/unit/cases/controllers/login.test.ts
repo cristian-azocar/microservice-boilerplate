@@ -2,8 +2,8 @@ import 'tests/unit/mocks/services/login';
 import { Context } from 'koa';
 import { createMockContext } from '@shopify/jest-koa-mocks';
 import LoginController from 'src/controllers/login';
-import loginSchema from 'tests/unit/schemas/login';
-import errorSchema from 'tests/unit/schemas/error';
+import loginSchema from 'tests/schemas/login';
+import errorSchema from 'tests/schemas/error';
 
 describe('login controller', (): void => {
   afterAll((): void => {

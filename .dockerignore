@@ -4,4 +4,6 @@ Dockerfile
 .git
 .vscode
 coverage
+dist
 settings/local.yml
+TODO.txt

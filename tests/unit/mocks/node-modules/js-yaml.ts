@@ -4,5 +4,8 @@ jest.mock('js-yaml', () => ({
     safeLoad: (): object => {
       return { SERVICE_NAME: 'Microservice Boilerplate' };
     },
+    safeDump: (): string => {
+      return 'SERVICE_NAME: Microservice Boilerplate';
+    },
   },
 }));

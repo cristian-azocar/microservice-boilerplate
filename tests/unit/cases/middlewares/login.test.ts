@@ -2,7 +2,7 @@ import 'tests/unit/mocks/validators/login';
 import { createMockContext } from '@shopify/jest-koa-mocks';
 import { Context } from 'koa';
 import LoginMiddleware from 'src/middlewares/login';
-import errorSchema from 'tests/unit/schemas/error';
+import errorSchema from 'tests/schemas/error';
 
 describe('login middleware', (): void => {
   afterAll((): void => {

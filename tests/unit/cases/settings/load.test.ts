@@ -1,12 +1,18 @@
+import 'tests/unit/mocks/node-modules/mock-all';
+
 describe('settings', (): void => {
   afterEach((): void => {
     jest.resetModules();
   });
 
+  afterAll((): void => {
+    jest.restoreAllMocks();
+  });
+
   const getSettings = (): any => {
     /* eslint-disable global-require */
     require('src/settings/load');
-    return require('nconf');
+    return require('nconf').default;
     /* eslint-enable global-require */
   };
 

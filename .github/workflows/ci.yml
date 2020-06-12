@@ -6,8 +6,8 @@ on:
       - '*.md'
 
 jobs:
-  build_and_test:
-    name: Build and test the project
+  build-and-test:
+    name: Build and test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout master

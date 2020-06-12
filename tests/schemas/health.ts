@@ -10,6 +10,8 @@ export default {
   pid: expect.any(Number),
   uptime: expect.any(Number),
   environment: expect.any(String),
-  appPackage: expect.any(String),
-  appVersionPackage: expect.any(String),
+  package: expect.objectContaining({
+    name: expect.any(String),
+    version: expect.any(String),
+  }),
 };
