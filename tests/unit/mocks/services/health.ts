@@ -17,8 +17,10 @@ function HealthServiceMock(): Partial<HealthService> {
         pid: 44617,
         uptime: 2.651281754,
         environment: 'development',
-        appPackage: 'ms-boilerplate',
-        appVersionPackage: '1.0.0',
+        package: {
+          name: 'microservice-boilerplate',
+          version: '1.0.0',
+        },
       }),
   };
 }
