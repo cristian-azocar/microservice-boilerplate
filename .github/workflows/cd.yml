@@ -9,7 +9,7 @@ on:
       - 'package.json'
 
 jobs:
-  push_docker_image:
+  push-docker-image:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +23,7 @@ jobs:
           repository: cazocar/node-microservice-boilerplate
           tags: latest
 
-  deploy_to_heroku:
+  deploy-to-heroku:
     name: Deploy to Heroku
     runs-on: ubuntu-latest
     steps:
