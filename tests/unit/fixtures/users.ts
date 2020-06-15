@@ -1,10 +1,13 @@
-export default [
+import User from 'src/models/user';
+
+const users: Array<User> = [
   {
     username: 'john.doe',
     password: 'secretpassword',
     name: 'John',
-    lastName: 'Doe',
     email: 'john.doe@fake.com',
-    createdAt: new Date(),
+    creationDate: new Date(),
   },
 ];
+
+export default users;

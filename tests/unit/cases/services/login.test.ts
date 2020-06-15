@@ -1,3 +1,5 @@
+import 'tests/unit/mocks/services/user';
+import 'tests/unit/mocks/services/authorization';
 import LoginService from 'src/services/login';
 import LoginResponse from 'src/models/responses/login';
 import loginSchema from 'tests/schemas/login';
