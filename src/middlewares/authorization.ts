@@ -3,7 +3,7 @@ import ErrorResponse from 'src/models/responses/error';
 import AuthorizationService from 'src/services/authorization';
 
 export default class AuthorizationMiddleware {
-  authorizationService: AuthorizationService = new AuthorizationService();
+  private authorizationService: AuthorizationService = new AuthorizationService();
 
   constructor() {
     this.authorize = this.authorize.bind(this);

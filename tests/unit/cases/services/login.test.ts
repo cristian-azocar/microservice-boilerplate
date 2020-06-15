@@ -5,7 +5,7 @@ import LoginResponse from 'src/models/responses/login';
 import loginSchema from 'tests/schemas/login';
 
 describe('login service', (): void => {
-  it('should return the login information', async (): Promise<void> => {
+  it('should return OK when credentials are valid', async (): Promise<void> => {
     const loginService: LoginService = new LoginService();
     const loginResponse: LoginResponse = await loginService.login(
       'john.doe',
@@ -13,5 +13,17 @@ describe('login service', (): void => {
     );
 
     expect(loginResponse).toMatchObject(loginSchema);
+  });
+
+  it('should return null when credentials are invalid', async (): Promise<
+    void
+  > => {
+    const loginService: LoginService = new LoginService();
+    const loginResponse: LoginResponse = await loginService.login(
+      'john.doe',
+      'wrongpassword'
+    );
+
+    expect(loginResponse).toBeNull();
   });
 });

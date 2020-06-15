@@ -5,6 +5,13 @@ function AuthorizationServiceMock(): Partial<AuthorizationService> {
     createToken: (): string => {
       return '';
     },
+    decodeToken: (token: string): string | object => {
+      if (token === 'invalid-token') {
+        throw new Error('Invalid token');
+      }
+
+      return '';
+    },
   };
 }
 
