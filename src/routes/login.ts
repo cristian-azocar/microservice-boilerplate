@@ -15,11 +15,7 @@ export default class LoginRouter {
   private buildRoutes(): void {
     const { router, controller, middleware } = this;
 
-    router.post(
-      '/login',
-      middleware.validateRequest.bind(middleware),
-      controller.login.bind(controller)
-    );
+    router.post('/login', middleware.validateRequest, controller.login);
   }
 
   getRoutes(): Middleware {

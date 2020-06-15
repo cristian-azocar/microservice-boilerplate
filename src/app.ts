@@ -9,6 +9,7 @@ const app: Koa = new Koa();
 app.use(logger());
 app.use(bodyParser());
 app.use(cors());
-app.use(routes);
+app.use(routes.publicRoutes);
+app.use(routes.protectedRoutes);
 
 export default app;
