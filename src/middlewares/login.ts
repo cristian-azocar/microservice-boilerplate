@@ -5,6 +5,10 @@ import ErrorResponse from 'src/models/responses/error';
 export default class LoginMiddleware {
   loginValidator: LoginValidator = new LoginValidator();
 
+  constructor() {
+    this.validateRequest = this.validateRequest.bind(this);
+  }
+
   validateRequest(ctx: Context, next: Next): void {
     const { error } = this.loginValidator.validate(ctx.request.body);
 

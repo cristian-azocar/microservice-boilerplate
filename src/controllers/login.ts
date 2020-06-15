@@ -6,6 +6,10 @@ import ErrorResponse from 'src/models/responses/error';
 export default class LoginController {
   loginService: LoginService = new LoginService();
 
+  constructor() {
+    this.login = this.login.bind(this);
+  }
+
   async login(ctx: Context): Promise<void> {
     const { username, password } = ctx.request.body;
     const loginResponse: LoginResponse = await this.loginService.login(
@@ -19,6 +23,7 @@ export default class LoginController {
         ctx.status,
         'Username or password incorrect'
       );
+
       return;
     }
 

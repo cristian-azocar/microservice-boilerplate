@@ -3,15 +3,23 @@ import { Middleware } from 'koa';
 import HealthRouter from 'src/routes/health';
 import LoginRouter from 'src/routes/login';
 import ApiDocsRouter from 'src/routes/api-docs';
+import TokenRouter from 'src/routes/token';
+import AuthorizationMiddleware from 'src/middlewares/authorization';
 
-const healthRouter: HealthRouter = new HealthRouter();
-const loginRouter: LoginRouter = new LoginRouter();
-const apiDocsRouter: ApiDocsRouter = new ApiDocsRouter();
+const authorizationMiddleware: AuthorizationMiddleware = new AuthorizationMiddleware();
 
-const routes: Middleware = compose([
-  healthRouter.getRoutes(),
-  loginRouter.getRoutes(),
-  apiDocsRouter.getRoutes(),
+const publicRoutes: Middleware = compose([
+  new HealthRouter().getRoutes(),
+  new LoginRouter().getRoutes(),
+  new ApiDocsRouter().getRoutes(),
 ]);
 
-export default routes;
+const protectedRoutes: Middleware = compose([
+  authorizationMiddleware.handleErrors,
+  authorizationMiddleware.authorize,
+
+  // Add any route that you want to protect below this line
+  new TokenRouter().getRoutes(),
+]);
+
+export default { publicRoutes, protectedRoutes };

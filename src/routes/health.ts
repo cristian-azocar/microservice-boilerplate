@@ -13,7 +13,7 @@ export default class HealthRouter {
   private buildRoutes(): void {
     const { router, controller } = this;
 
-    router.get('/health', controller.getHealthInfo.bind(controller));
+    router.get('/health', controller.getHealthInfo);
   }
 
   getRoutes(): Middleware {
