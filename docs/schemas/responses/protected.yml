@@ -1,0 +1,5 @@
+properties:
+  message:
+    type: string
+    description: A simple message
+    example: This is a protected resource
