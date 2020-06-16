@@ -7,14 +7,18 @@ import errorSchema from 'tests/schemas/error';
 const appTest: SuperTest<Test> = supertest(app.callback());
 
 describe('protected router', (): void => {
-  it('should return Unauthorized', async (): Promise<void> => {
+  it('should return 401 when no credentials are provided', async (): Promise<
+    void
+  > => {
     const response: Response = await appTest.get('/protected');
 
     expect(response.status).toEqual(401);
     expect(response.body).toMatchObject(errorSchema);
   });
 
-  it('should return OK', async (): Promise<void> => {
+  it('should return 200 when credentials are valid', async (): Promise<
+    void
+  > => {
     const response: Response = await appTest
       .get('/protected')
       .set('Authorization', 'Bearer some-credentials');
