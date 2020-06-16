@@ -3,8 +3,8 @@ import { Middleware } from 'koa';
 import HealthRouter from 'src/routes/health';
 import LoginRouter from 'src/routes/login';
 import ApiDocsRouter from 'src/routes/api-docs';
-import TokenRouter from 'src/routes/token';
 import AuthorizationMiddleware from 'src/middlewares/authorization';
+import ProtectedRouter from 'src/routes/protected';
 
 const authorizationMiddleware: AuthorizationMiddleware = new AuthorizationMiddleware();
 
@@ -19,7 +19,7 @@ const protectedRoutes: Middleware = compose([
   authorizationMiddleware.authorize,
 
   // Add any route that you want to protect below this line
-  new TokenRouter().getRoutes(),
+  new ProtectedRouter().getRoutes(),
 ]);
 
 export default { publicRoutes, protectedRoutes };
