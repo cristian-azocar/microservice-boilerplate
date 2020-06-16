@@ -15,7 +15,6 @@ const publicRoutes: Middleware = compose([
 ]);
 
 const protectedRoutes: Middleware = compose([
-  authorizationMiddleware.handleErrors,
   authorizationMiddleware.authorize,
 
   // Add any route that you want to protect below this line

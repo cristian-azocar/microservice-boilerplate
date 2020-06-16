@@ -9,7 +9,7 @@ export default class LoginMiddleware {
     this.validateRequest = this.validateRequest.bind(this);
   }
 
-  validateRequest(ctx: Context, next: Next): void {
+  async validateRequest(ctx: Context, next: Next): Promise<void> {
     const { error } = this.loginValidator.validate(ctx.request.body);
 
     if (error) {
@@ -18,6 +18,6 @@ export default class LoginMiddleware {
       return;
     }
 
-    next();
+    await next();
   }
 }

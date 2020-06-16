@@ -1,11 +1,11 @@
 import Router from 'koa-router';
 import { Middleware } from 'koa';
-import LoginController from 'src/controllers/login';
+import UserController from 'src/controllers/user';
 import LoginMiddleware from 'src/middlewares/login';
 
 export default class LoginRouter {
   router: Router = new Router();
-  controller: LoginController = new LoginController();
+  controller: UserController = new UserController();
   middleware: LoginMiddleware = new LoginMiddleware();
 
   constructor() {

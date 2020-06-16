@@ -1,5 +1,4 @@
 import { Context, Next } from 'koa';
-import ErrorResponse from 'src/models/responses/error';
 import AuthorizationService from 'src/services/authorization';
 
 export default class AuthorizationMiddleware {
@@ -29,21 +28,6 @@ export default class AuthorizationMiddleware {
       next();
     } catch (e) {
       ctx.throw(401, e.message);
-    }
-  }
-
-  async handleErrors(ctx: Context, next: Next): Promise<void> {
-    try {
-      await next();
-    } catch (e) {
-      if (e.status === 401) {
-        const message: string = e.message || 'Unauthorized';
-        ctx.status = e.status;
-        ctx.body = new ErrorResponse(e.status, message);
-        return;
-      }
-
-      throw e;
     }
   }
 }
