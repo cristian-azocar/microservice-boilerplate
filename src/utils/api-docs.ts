@@ -5,7 +5,7 @@ import fs from 'fs';
 import jsonRefs from 'json-refs';
 
 export default class ApiDocsUtils {
-  private openApiPath = './docs/index.yaml';
+  private openApiPath = './docs/index.yml';
   private jsonRefsOptions: jsonRefs.JsonRefsOptions = {
     location: this.openApiPath,
     loaderOptions: {
