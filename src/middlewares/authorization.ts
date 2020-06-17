@@ -8,7 +8,7 @@ export default class AuthorizationMiddleware {
     this.authorize = this.authorize.bind(this);
   }
 
-  authorize(ctx: Context, next: Next): void {
+  async authorize(ctx: Context, next: Next): Promise<void> {
     const { header } = ctx;
 
     if (!header || !header.authorization) {
@@ -25,9 +25,10 @@ export default class AuthorizationMiddleware {
 
     try {
       this.authorizationService.decodeToken(authorizationParts[1]);
-      next();
     } catch (e) {
       ctx.throw(401, e.message);
     }
+
+    await next();
   }
 }
