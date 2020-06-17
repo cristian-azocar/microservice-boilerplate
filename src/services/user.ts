@@ -5,6 +5,7 @@ import UnauthorizedError from 'src/errors/unauthorized';
 
 const fakeUsers: Array<User> = [
   {
+    id: 1,
     username: 'admin',
     password: '1234',
     name: 'John Doe',
@@ -42,5 +43,9 @@ export default class UserService {
       creationDate: user.creationDate,
       token,
     };
+  }
+
+  async findById(id: number): Promise<User> {
+    return fakeUsers.find((user) => user.id === id);
   }
 }
