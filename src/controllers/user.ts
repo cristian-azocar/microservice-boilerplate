@@ -3,17 +3,11 @@ import UserService from 'src/services/user';
 import User from 'src/models/user';
 
 export default class UserController {
-  userService: UserService = new UserService();
+  private userService: UserService;
 
-  constructor() {
-    this.login = this.login.bind(this);
+  constructor(userService: UserService) {
+    this.userService = userService;
     this.getUserById = this.getUserById.bind(this);
-  }
-
-  async login(ctx: Context): Promise<void> {
-    const { username, password } = ctx.request.body;
-
-    ctx.body = await this.userService.login(username, password);
   }
 
   async getUserById(ctx: Context): Promise<void> {
