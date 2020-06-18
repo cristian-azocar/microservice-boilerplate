@@ -1,16 +1,12 @@
 import { Context, Next } from 'koa';
 import AuthService from 'src/services/auth';
-import AuthValidator from 'src/validators/auth';
 
 export default class AuthMiddleware {
   private authService: AuthService;
-  private authValidator: AuthValidator;
 
-  constructor(authService: AuthService, authValidator: AuthValidator) {
+  constructor(authService: AuthService) {
     this.authService = authService;
-    this.authValidator = authValidator;
     this.authorize = this.authorize.bind(this);
-    this.validateLogin = this.validateLogin.bind(this);
   }
 
   async authorize(ctx: Context, next: Next): Promise<void> {
@@ -32,16 +28,6 @@ export default class AuthMiddleware {
       this.authService.decodeToken(authorizationParts[1]);
     } catch (e) {
       ctx.throw(401, e.message);
-    }
-
-    await next();
-  }
-
-  async validateLogin(ctx: Context, next: Next): Promise<void> {
-    try {
-      this.authValidator.validateLogin(ctx.request.body);
-    } catch (e) {
-      ctx.throw(400, e.message);
     }
 
     await next();
