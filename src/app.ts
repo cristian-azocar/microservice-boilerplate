@@ -10,7 +10,7 @@ const app: Koa = new Koa();
 app.use(logger());
 app.use(bodyParser());
 app.use(cors());
-app.use(errorHandlerMiddleware.handleErrors);
+app.use(errorHandlerMiddleware);
 app.use(routes.publicRoutes);
 app.use(routes.protectedRoutes);
 
