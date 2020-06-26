@@ -2,22 +2,16 @@ import jwt, { SignOptions, Secret } from 'jsonwebtoken';
 import nconf from 'nconf';
 import LoginResponse from 'src/models/responses/login';
 import UnauthorizedError from 'src/errors/unauthorized';
-import UserService from 'src/services/user';
 import User from 'src/models/user';
+import userService from 'src/services/user';
 
-export default class AuthService {
-  private userService: UserService;
-
-  constructor(userService: UserService) {
-    this.userService = userService;
-  }
-
+class AuthService {
   private secret: Secret = nconf.get('JWT_SECRET');
   private oneDayInSeconds = 86400;
   private options: SignOptions = { expiresIn: this.oneDayInSeconds };
 
   async login(username: string, password: string): Promise<LoginResponse> {
-    const user: User = await this.userService.findByUsernameAndPassword(
+    const user: User = await userService.findByUsernameAndPassword(
       username,
       password
     );
@@ -46,3 +40,5 @@ export default class AuthService {
     return jwt.verify(token, this.secret);
   }
 }
+
+export default new AuthService();

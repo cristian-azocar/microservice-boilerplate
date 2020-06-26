@@ -11,7 +11,7 @@ const fakeUsers: Array<User> = [
   },
 ];
 
-export default class UserService {
+class UserService {
   async findByUsernameAndPassword(
     username: string,
     password: string
@@ -25,3 +25,5 @@ export default class UserService {
     return fakeUsers.find((user) => user.id === id);
   }
 }
+
+export default new UserService();

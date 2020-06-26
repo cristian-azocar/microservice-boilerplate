@@ -1,13 +1,9 @@
 import Router from 'koa-router';
 import UserController from 'src/controllers/user';
-import { Middleware } from 'koa';
 
-function getRoutes(controller: UserController): Middleware {
-  const router: Router = new Router();
+const router: Router = new Router();
+const userController: UserController = new UserController();
 
-  router.get('/user/:id', controller.getUserById);
+router.get('/user/:id', userController.getUserById);
 
-  return router.routes();
-}
-
-export default getRoutes;
+export default router;
