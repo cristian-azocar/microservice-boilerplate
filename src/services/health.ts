@@ -2,7 +2,7 @@ import HealthInfo from 'src/models/responses/health';
 import nconf from 'nconf';
 import pkg from 'package.json';
 
-export default class HealthService {
+class HealthService {
   async getHealthInfo(): Promise<HealthInfo> {
     return {
       nodeVersion: process.version,
@@ -18,3 +18,5 @@ export default class HealthService {
     };
   }
 }
+
+export default new HealthService();
