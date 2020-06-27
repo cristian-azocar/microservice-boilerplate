@@ -7,15 +7,15 @@ properties:
     type: string
     description: The name of the user
     example: John
-  lastName:
-    type: string
-    description: The last name of the user
-    example: Doe
   email:
     type: string
     description: The e-mail of the user
     example: john.doe@fake.com
-  createdAt:
+  creationDate:
     type: string
     description: The date the account was created
     example: '2020-04-23T17:59:52.446Z'
+  token:
+    type: string
+    description: The token to access protected resources
+    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTkyMzE3MDkwLCJleHAiOjE1OTI0MDM0OTB9.hTMco5LgMQlB6MOGfHoMxDir2v8kmELBNoIeOWpR0Rc

@@ -1,8 +1,8 @@
-import { ValidationResult } from '@hapi/joi';
-import schema from 'src/validators/schemas/login';
+import Joi, { Schema } from '@hapi/joi';
 
-export default class LoginValidator {
-  validate(value: any): ValidationResult {
-    return schema.validate(value);
-  }
-}
+const schema: Schema = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+export default schema;

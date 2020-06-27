@@ -1,7 +1,8 @@
-export default interface LoginResponse {
+export default interface User {
+  id: number;
   username: string;
+  password: string;
   name: string;
   email: string;
   creationDate: Date;
-  token: string;
 }

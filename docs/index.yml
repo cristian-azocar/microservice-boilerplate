@@ -11,7 +11,10 @@ servers:
 
 paths:
   /health:
-    $ref: ./paths/health.yaml
+    $ref: ./paths/health.yml
 
   /login:
-    $ref: ./paths/login.yaml
+    $ref: ./paths/login.yml
+
+  /protected:
+    $ref: ./paths/protected.yml
