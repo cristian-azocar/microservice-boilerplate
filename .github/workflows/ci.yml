@@ -32,3 +32,4 @@ jobs:
         run: npm run test:integration
         env:
           APP_URL: http://localhost:3000
+          JWT_SECRET: SECRET_PASSWORD
