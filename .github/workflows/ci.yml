@@ -28,8 +28,9 @@ jobs:
         run: docker build -t microservice-boilerplate .
       - name: Run the Docker image
         run: docker run -d -p 3000:3000 --name microservice-boilerplate microservice-boilerplate
+        env:
+          JWT_SECRET: SECRET_PASSWORD
       - name: Run integration tests
         run: npm run test:integration
         env:
           APP_URL: http://localhost:3000
-          JWT_SECRET: SECRET_PASSWORD
