@@ -1,8 +1,8 @@
-import LoginService from 'src/services/login';
+import AuthService from 'src/services/auth';
 import LoginResponse from 'src/models/responses/login';
 import users from 'tests/unit/fixtures/users';
 
-function LoginServiceMock(): Partial<LoginService> {
+function AuthServiceMock(): Partial<AuthService> {
   return {
     login: async (
       username: string,
@@ -13,7 +13,7 @@ function LoginServiceMock(): Partial<LoginService> {
       );
 
       if (!user) {
-        return Promise.resolve(null);
+        throw new Error('Incorrect username or password');
       }
 
       const response: LoginResponse = {
@@ -24,9 +24,19 @@ function LoginServiceMock(): Partial<LoginService> {
         token: '',
       };
 
-      return Promise.resolve(response);
+      return response;
+    },
+    createToken: (): string => {
+      return 'encoded-token';
+    },
+    decodeToken: (token: string): string | object => {
+      if (token === 'invalid-token') {
+        throw new Error('Invalid token');
+      }
+
+      return 'decoded-token';
     },
   };
 }
 
-jest.mock('src/services/login', () => LoginServiceMock);
+jest.mock('src/services/auth', () => AuthServiceMock);

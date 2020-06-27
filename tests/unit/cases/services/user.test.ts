@@ -6,14 +6,14 @@ import usersFixture from 'tests/unit/fixtures/users';
 describe('user service', (): void => {
   const userService: UserService = new UserService();
 
-  afterEach((): void => {
-    jest.restoreAllMocks();
+  beforeAll((): void => {
+    userService.fakeUsers = usersFixture;
   });
 
-  it('should return a user information when credentials are valid', (): void => {
-    jest.spyOn(userService, 'getAllUsers').mockReturnValue(usersFixture);
-
-    const user: User = userService.getUserByCredentials(
+  it('should return a user information when credentials are valid', async (): Promise<
+    void
+  > => {
+    const user: User = await userService.findByUsernameAndPassword(
       'john.doe',
       'secretpassword'
     );
@@ -21,10 +21,10 @@ describe('user service', (): void => {
     expect(user).toMatchObject(userSchema);
   });
 
-  it('should return undefined when credentials are invalid', (): void => {
-    jest.spyOn(userService, 'getAllUsers').mockReturnValue(usersFixture);
-
-    const user: User = userService.getUserByCredentials(
+  it('should return undefined when credentials are invalid', async (): Promise<
+    void
+  > => {
+    const user: User = await userService.findByUsernameAndPassword(
       'john.doe',
       'wrongpassword'
     );
@@ -32,9 +32,9 @@ describe('user service', (): void => {
     expect(user).toBeUndefined();
   });
 
-  it('should return an array of users', (): void => {
-    const users: Array<User> = userService.getAllUsers();
+  it('should return a user by ID', async (): Promise<void> => {
+    const user: User = await userService.findById(1);
 
-    expect(users).toBeDefined();
+    expect(user).toBeDefined();
   });
 });

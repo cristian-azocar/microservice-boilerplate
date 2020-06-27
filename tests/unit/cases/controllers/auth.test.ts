@@ -1,17 +1,17 @@
-import 'tests/unit/mocks/services/login';
+import 'tests/unit/mocks/services/auth';
 import { Context } from 'koa';
 import { createMockContext } from '@shopify/jest-koa-mocks';
-import LoginController from 'src/controllers/login';
+import AuthController from 'src/controllers/auth';
 import loginSchema from 'tests/schemas/login';
 import errorSchema from 'tests/schemas/error';
 
-describe('login controller', (): void => {
+describe('auth controller', (): void => {
   afterAll((): void => {
     jest.resetAllMocks();
   });
 
   it('should login the user', async (): Promise<void> => {
-    const loginController: LoginController = new LoginController();
+    const authController: AuthController = new AuthController();
     const ctx: Context = createMockContext();
 
     ctx.request.body = {
@@ -19,16 +19,16 @@ describe('login controller', (): void => {
       password: 'secretpassword',
     };
 
-    await loginController.login(ctx);
+    await authController.login(ctx);
 
     expect(ctx.body).toMatchObject(loginSchema);
     expect(ctx.body.username).toEqual(ctx.request.body.username);
   });
 
-  it('should return an error when credentials are invalid', async (): Promise<
+  it('should throw an error when credentials are invalid', async (): Promise<
     void
   > => {
-    const loginController: LoginController = new LoginController();
+    const authController: AuthController = new AuthController();
     const ctx: Context = createMockContext();
 
     ctx.request.body = {
@@ -36,9 +36,6 @@ describe('login controller', (): void => {
       password: 'wrongpassword',
     };
 
-    await loginController.login(ctx);
-
-    expect(ctx.status).toEqual(401);
-    expect(ctx.body).toMatchObject(errorSchema);
+    await expect(authController.login(ctx)).rejects.toThrow();
   });
 });

@@ -4,16 +4,16 @@ import users from 'tests/unit/fixtures/users';
 
 function UserServiceMock(): Partial<UserService> {
   return {
-    getUserByCredentials: (username: string, password: string): User => {
-      const user = users.find(
+    findByUsernameAndPassword: async (
+      username: string,
+      password: string
+    ): Promise<User> => {
+      return users.find(
         (u) => u.username === username && u.password === password
       );
-
-      if (!user) {
-        return null;
-      }
-
-      return user;
+    },
+    findById: async (id: number): Promise<User> => {
+      return users.find((u) => u.id === id);
     },
   };
 }

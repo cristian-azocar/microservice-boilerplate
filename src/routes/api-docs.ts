@@ -1,8 +1,9 @@
 import { Middleware, Context, Next } from 'koa';
 import Router from 'koa-router';
-import apiDocsUtils from 'src/utils/api-docs';
+import ApiDocsUtils from 'src/utils/api-docs';
 
 const router: Router = new Router();
+const apiDocsUtils: ApiDocsUtils = new ApiDocsUtils();
 
 router.get(
   '/docs',

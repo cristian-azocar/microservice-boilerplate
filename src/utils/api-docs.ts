@@ -4,7 +4,7 @@ import yaml from 'js-yaml';
 import fs from 'fs';
 import jsonRefs from 'json-refs';
 
-class ApiDocsUtils {
+export default class ApiDocsUtils {
   private openApiPath = './docs/index.yml';
   private jsonRefsOptions: jsonRefs.JsonRefsOptions = {
     location: this.openApiPath,
@@ -36,5 +36,3 @@ class ApiDocsUtils {
     });
   }
 }
-
-export default new ApiDocsUtils();
