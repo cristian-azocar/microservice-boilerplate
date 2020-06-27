@@ -1,17 +1,32 @@
 import compose from 'koa-compose';
 import { Middleware } from 'koa';
-import HealthRouter from 'src/routes/health';
-import LoginRouter from 'src/routes/login';
-import ApiDocsRouter from 'src/routes/api-docs';
+import healthRouter from 'src/routes/health';
+import userRouter from 'src/routes/user';
+import authRouter from 'src/routes/auth';
+import apiDocsRouter from 'src/routes/api-docs';
+import AuthMiddleware from 'src/middlewares/auth';
+import ErrorHandlerMiddleware from 'src/middlewares/error-handler';
 
-const healthRouter: HealthRouter = new HealthRouter();
-const loginRouter: LoginRouter = new LoginRouter();
-const apiDocsRouter: ApiDocsRouter = new ApiDocsRouter();
+const authMiddleware: AuthMiddleware = new AuthMiddleware();
+const errorHandlerMiddleware: ErrorHandlerMiddleware = new ErrorHandlerMiddleware();
 
-const routes: Middleware = compose([
-  healthRouter.getRoutes(),
-  loginRouter.getRoutes(),
-  apiDocsRouter.getRoutes(),
+// Routes that doesn't require authorization goes here
+const publicRoutes: Middleware = compose([
+  healthRouter.routes(),
+  authRouter.routes(),
+  apiDocsRouter.routes(),
 ]);
 
-export default routes;
+// Routes that requires authorization goes here
+const protectedRoutes: Middleware = compose([
+  authMiddleware.authorize,
+  userRouter.routes(),
+]);
+
+const allRoutes: Middleware = compose([
+  errorHandlerMiddleware.handleErrors,
+  publicRoutes,
+  protectedRoutes,
+]);
+
+export default allRoutes;

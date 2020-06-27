@@ -7,17 +7,17 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../schemas/requests/login.yaml'
+          $ref: '../schemas/requests/login.yml'
   responses:
     200:
       description: OK
       content:
         application/json:
           schema:
-            $ref: '../schemas/responses/login.yaml'
+            $ref: '../schemas/responses/login.yml'
     401:
       description: Username and/or password incorrect
       content:
         application/json:
           schema:
-            $ref: '../schemas/responses/error.yaml'
+            $ref: '../schemas/responses/error.yml'

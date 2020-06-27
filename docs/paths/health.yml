@@ -8,4 +8,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../schemas/responses/health.yaml'
+            $ref: '../schemas/responses/health.yml'

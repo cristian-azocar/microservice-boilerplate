@@ -1,22 +1,9 @@
 import Router from 'koa-router';
-import { Middleware } from 'koa';
 import HealthController from 'src/controllers/health';
 
-export default class HealthRouter {
-  router: Router = new Router();
-  controller: HealthController = new HealthController();
+const router: Router = new Router();
+const healthController: HealthController = new HealthController();
 
-  constructor() {
-    this.buildRoutes();
-  }
+router.get('/health', healthController.getHealthInfo);
 
-  private buildRoutes(): void {
-    const { router, controller } = this;
-
-    router.get('/health', controller.getHealthInfo.bind(controller));
-  }
-
-  getRoutes(): Middleware {
-    return this.router.routes();
-  }
-}
+export default router;
