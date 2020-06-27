@@ -2,6 +2,7 @@ import User from 'src/models/user';
 
 const users: Array<User> = [
   {
+    id: 1,
     username: 'john.doe',
     password: 'secretpassword',
     name: 'John',

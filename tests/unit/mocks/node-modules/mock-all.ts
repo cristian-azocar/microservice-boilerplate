@@ -5,3 +5,4 @@ import 'tests/unit/mocks/node-modules/json-refs';
 import 'tests/unit/mocks/node-modules/path';
 import 'tests/unit/mocks/node-modules/nconf';
 import 'tests/unit/mocks/node-modules/jsonwebtoken';
+import 'tests/unit/mocks/node-modules/joi';

@@ -1,7 +1,9 @@
 import { Context } from 'koa';
-import authService from 'src/services/auth';
+import AuthService from 'src/services/auth';
 
 export default class AuthController {
+  private authService: AuthService = new AuthService();
+
   constructor() {
     this.login = this.login.bind(this);
   }
@@ -9,6 +11,6 @@ export default class AuthController {
   async login(ctx: Context): Promise<void> {
     const { username, password } = ctx.request.body;
 
-    ctx.body = await authService.login(username, password);
+    ctx.body = await this.authService.login(username, password);
   }
 }

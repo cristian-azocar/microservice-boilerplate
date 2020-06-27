@@ -1,7 +1,9 @@
 import { Context, Next } from 'koa';
-import authService from 'src/services/auth';
+import AuthService from 'src/services/auth';
 
-class AuthMiddleware {
+export default class AuthMiddleware {
+  private authService: AuthService = new AuthService();
+
   constructor() {
     this.authorize = this.authorize.bind(this);
   }
@@ -22,7 +24,7 @@ class AuthMiddleware {
     }
 
     try {
-      authService.decodeToken(authorizationParts[1]);
+      this.authService.decodeToken(authorizationParts[1]);
     } catch (e) {
       ctx.throw(401, e.message);
     }
@@ -30,5 +32,3 @@ class AuthMiddleware {
     await next();
   }
 }
-
-export default new AuthMiddleware();

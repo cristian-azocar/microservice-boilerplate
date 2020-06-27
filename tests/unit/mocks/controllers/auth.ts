@@ -1,16 +1,23 @@
 import { Context } from 'koa';
-import LoginController from 'src/controllers/login';
+import AuthController from 'src/controllers/auth';
 import LoginResponse from 'src/models/responses/login';
 import users from 'tests/unit/fixtures/users';
 import User from 'src/models/user';
 
-function LoginControllerMock(): Partial<LoginController> {
+function AuthControllerMock(): Partial<AuthController> {
   return {
-    login: (ctx: Context): Promise<void> => {
+    login: async (ctx: Context): Promise<void> => {
       const { username, password } = ctx.request.body;
       const user: User = users.find(
         (u) => u.username === username && u.password === password
       );
+
+      if (!user) {
+        ctx.status = 401;
+        ctx.body = { code: 401, message: 'Incorrect username or password' };
+        return;
+      }
+
       const response: LoginResponse = {
         username: user.username,
         name: user.name,
@@ -20,10 +27,8 @@ function LoginControllerMock(): Partial<LoginController> {
       };
 
       ctx.body = response;
-
-      return Promise.resolve();
     },
   };
 }
 
-jest.mock('src/controllers/login', () => LoginControllerMock);
+jest.mock('src/controllers/auth', () => AuthControllerMock);
