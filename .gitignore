@@ -1,5 +1,4 @@
 node_modules
-.vscode
 coverage
 dist
 settings/local.yml
