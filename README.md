@@ -12,7 +12,6 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - [Getting started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installing](#installing)
-  - [IDE configuration](#ide-configuration)
 - [Running the microservice](#running-the-microservice)
 - [Running the tests](#running-the-tests)
   - [Unit tests](#unit-tests)
@@ -85,31 +84,6 @@ Install the dependencies (only needed if you don't want to use Docker)
 ```
 npm install
 ```
-
-### IDE configuration
-
-The project is configured to use ESLint, Prettier and EditorConfig to format de code, so it is highly recommended that you enable the auto-format feature in your code editor.
-
-If you are using [Visual Studio Code](https://code.visualstudio.com/), follow this steps:
-
-- Install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
-- Install the [Prettier extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
-- Install the [EditorConfig extension](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
-- Open the command palette with `CTRL + SHIFT + P`
-- Type `open settings` and select `Open Workspace Settings (JSON)`
-- A JSON file will open. Copy and paste the following:
-
-```json
-{
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
-}
-```
-
-Now the IDE will automatically format the code when you save.
 
 ## Running the microservice
 
