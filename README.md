@@ -37,7 +37,7 @@ A **highly opinionated** RESTful microservice boilerplate using [Node.js](https:
 - Unit tests with [Jest](https://jestjs.io/) and [Supertest](http://visionmedia.github.io/superagent/).
 - Good and clean code practices using [ESLint](https://eslint.org/) (based on [Airbnb configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)), [Prettier](https://prettier.io/) and [EditorConfig](https://editorconfig.org/).
 - A pre-commit [git hook](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) to prevent dirty code to reach your local and remote repository, using [Husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged).
-- Configuration variables ready to be read from the command line arguments, environment variables or YAML files, thanks to [nconf](https://github.com/indexzero/nconf).
+- Configuration variables ready to be read from the command line arguments, environment variables or `.env` files, thanks to [dotenv](https://github.com/motdotla/dotenv).
 - Easy and readable way to import your modules using absolute paths like they were installed into `node_modules` directory, thanks to TypeScript and [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node).
 - Request validations using [joi](https://hapi.dev/module/joi/).
 - API documentation using the [OpenAPI](https://www.openapis.org/) specification and [Swagger](https://swagger.io/).
@@ -212,21 +212,7 @@ npm run lint:fix
 
 The microservice is ready to read configuration variables so you can dynamically set parameters without having to re-build the application, either by a local file, command line arguments, environment variables, environment-specific files or a default file. All configuration files must be in [YAML](https://yaml.org/) format.
 
-It uses a configuration source based on a hierarchically order, which is a `nconf` feature. This means that some configurations will have a higher priority over the others and will override them. For example, if you set the same two variables in a `default.yml` file and the other on a environment variable, the later one will be used, because environment variables have higher priority. This is really useful when you want to set default values and give the option to override them, or when you want to have different configuration files depending on the environment the service is running (development, production, etc).
-
-The hierarchical order of priority is as follows
-
-- Local configuration file (`local.yml`)
-- Command line arguments
-- Environment variables
-- Environment-specific file (`development.yml`, `production.yml`, etc)
-- Default file (`default.yml`)
-
-The `local.yml` file have the maximum priority as its meant to easily change the configuration while developing.
-
-The environment-specific file name is built based on the `NODE_ENV` environment variable value. For example, if your `NODE_ENV` value is `staging`, then the microservice will search for a file named `staging.yml`.
-
-Another thing to notice, is that the `default.yml` file has the least priority, so if you forget to configure the variable in your environment, and also forget to add it to the `default.yml` file, its value will be `undefined`, which might bring some unexpected problems. That's why it's highly recommended that for every configuration variable that you create, set a fallback value in the `default.yml` file, unless you actually don't care if it has an `undefined` value.
+It uses a configuration source based on a hierarchically order, which is a `dotenv` feature. This means that some configurations will have a higher priority over the others and will override them. For example, if you set the same two variables in a `.env` file and the other on a environment variable, the later one will be used, because environment variables have higher priority. This is really useful when you want to set default values and give the option to override them.
 
 ## Module imports
 
@@ -431,7 +417,7 @@ docker run -d -p 3000:3000 microservice-boilerplate
 - [EditorConfig](https://editorconfig.org/)
 - [Husky](https://github.com/typicode/husky)
 - [lint-staged](https://github.com/okonet/lint-staged)
-- [nconf](https://github.com/indexzero/nconf)
+- [dotenv](https://github.com/motdotla/dotenv)
 - [app-module-path](https://github.com/patrick-steele-idem/app-module-path-node)
 - [joi](https://hapi.dev/module/joi/)
 - [OpenAPI](https://www.openapis.org/)

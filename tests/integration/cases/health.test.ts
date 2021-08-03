@@ -1,9 +1,8 @@
 import supertest, { Response, SuperTest, Test } from 'supertest';
-import nconf from 'nconf';
 import healthSchema from 'tests/schemas/health';
 
 describe('health', (): void => {
-  const server: SuperTest<Test> = supertest(nconf.get('APP_URL'));
+  const server: SuperTest<Test> = supertest(process.env.APP_URL);
 
   it('should return the health of the service', async (): Promise<void> => {
     const response: Response = await server.get('/health');

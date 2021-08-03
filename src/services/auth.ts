@@ -1,5 +1,4 @@
 import jwt, { SignOptions, Secret } from 'jsonwebtoken';
-import nconf from 'nconf';
 import LoginResponse from 'src/models/responses/login';
 import UnauthorizedError from 'src/errors/unauthorized';
 import User from 'src/models/user';
@@ -7,7 +6,7 @@ import UserService from 'src/services/user';
 
 export default class AuthService {
   private userService: UserService = new UserService();
-  private secret: Secret = nconf.get('JWT_SECRET');
+  private secret: Secret = process.env.JWT_SECRET;
   private oneDayInSeconds = 86400;
   private options: SignOptions = { expiresIn: this.oneDayInSeconds };
 

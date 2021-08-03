@@ -1,6 +1,8 @@
 import './utils/module-path-resolutor';
-import 'src/settings/load';
+import dotenv from 'dotenv';
 import app from 'src/app';
+
+dotenv.config();
 
 const port: number = +process.env.PORT || 3000;
 

@@ -1,9 +1,8 @@
 import supertest, { Response, SuperTest, Test } from 'supertest';
-import nconf from 'nconf';
 import loginSchema from 'tests/schemas/login';
 
 describe('auth', (): void => {
-  const server: SuperTest<Test> = supertest(nconf.get('APP_URL'));
+  const server: SuperTest<Test> = supertest(process.env.APP_URL);
 
   it('should log in a user in the system', async (): Promise<void> => {
     const user: object = { username: 'admin', password: '1234' };
