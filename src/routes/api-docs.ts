@@ -2,7 +2,7 @@ import { Middleware, Context, Next } from 'koa';
 import Router from 'koa-router';
 import ApiDocsUtils from 'src/utils/api-docs';
 
-const router: Router = new Router();
+const router: Router = new Router({ prefix: '/api' });
 const apiDocsUtils: ApiDocsUtils = new ApiDocsUtils();
 
 router.get(
