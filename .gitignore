@@ -1,6 +1,7 @@
 node_modules
-.vscode
 coverage
 dist
 settings/local.yml
 TODO.txt
+.DS_Store
+.env*

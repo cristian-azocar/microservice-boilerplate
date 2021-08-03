@@ -3,7 +3,7 @@ import AuthController from 'src/controllers/auth';
 import ValidatorMiddleware from 'src/middlewares/validator';
 import loginSchema from 'src/validators/login';
 
-const router: Router = new Router();
+const router: Router = new Router({ prefix: '/api' });
 const authController: AuthController = new AuthController();
 const validatorMiddleware: ValidatorMiddleware = new ValidatorMiddleware();
 
