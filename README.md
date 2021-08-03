@@ -210,7 +210,7 @@ npm run lint:fix
 
 ## Configuration variables
 
-The microservice is ready to read configuration variables so you can dynamically set parameters without having to re-build the application, either by a local file, command line arguments, environment variables, environment-specific files or a default file. All configuration files must be in [YAML](https://yaml.org/) format.
+The microservice is ready to read configuration variables so you can dynamically set parameters, either by a local file, command line arguments or environment variables. All configuration files must be in the `.env` file.
 
 It uses a configuration source based on a hierarchically order, which is a `dotenv` feature. This means that some configurations will have a higher priority over the others and will override them. For example, if you set the same two variables in a `.env` file and the other on a environment variable, the later one will be used, because environment variables have higher priority. This is really useful when you want to set default values and give the option to override them.
 
