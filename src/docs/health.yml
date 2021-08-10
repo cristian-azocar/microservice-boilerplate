@@ -1,0 +1,54 @@
+paths:
+  /api/health:
+    get:
+      summary: Returns the current status of the service
+      tags:
+        - health
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Health'
+
+components:
+  responses:
+    Health:
+      type: object
+      properties:
+        nodeVersion:
+          type: string
+          description: The Node.js version used by the service
+          example: v12.16.1
+        service:
+          type: string
+          description: The name of the service
+          example: Microservice Boilerplate
+        memory:
+          properties:
+            rss:
+              type: integer
+              description: The total memory allocated for the process execution
+              example: 185724928
+            heapTotal:
+              type: integer
+              description: The total size of the allocated heap
+              example: 158384128
+            heapUsed:
+              type: integer
+              description: The actual memory used during the execution of the process
+              example: 134505000
+            external:
+              type: integer
+              description: The memory used by C++ objects bound to JavaScript objects managed by V8
+              example: 1782894
+        pid:
+          type: integer
+          description: The ID of the process
+          example: 9136
+        uptime:
+          type: number
+          format: float
+          description: The number of seconds the process has been running
+          example: 1389.2106115

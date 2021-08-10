@@ -1,10 +1,7 @@
-import './utils/module-path-resolutor';
-import dotenv from 'dotenv';
-import app from 'src/app';
+import './utils/loadEnvFile';
+import app from './app';
 
-dotenv.config();
-
-const port: number = +process.env.PORT || 3000;
+const port: number = (process.env.PORT && +process.env.PORT) || 3000;
 
 app.listen(port, (): void => {
   // eslint-disable-next-line no-console
