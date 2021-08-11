@@ -4,3 +4,4 @@ dist
 TODO.txt
 .DS_Store
 .env*
+.eslintcache
