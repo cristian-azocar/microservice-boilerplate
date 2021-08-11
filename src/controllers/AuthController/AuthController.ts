@@ -6,6 +6,7 @@ export default class AuthController {
 
   constructor() {
     this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   async login(req: Request, res: Response): Promise<void> {
@@ -13,5 +14,10 @@ export default class AuthController {
     const loginResult = await this.authService.login(username, password);
 
     res.json(loginResult);
+  }
+
+  async logout(req: Request, res: Response): Promise<void> {
+    await this.authService.logout();
+    res.status(200).send();
   }
 }

@@ -53,11 +53,11 @@ https://microservice-boilerplate.herokuapp.com
 
 The demo is deployed in Heroku and it includes the following endpoints:
 
-| Endpoint        | Method | Description                                         |
-| --------------- | ------ | --------------------------------------------------- |
-| /api/health     | GET    | Gets the health information of the microservice     |
-| /api/auth/login | POST   | Logs a user into the system                         |
-| /api/docs       | GET    | Gets the API documentation rendered with Swagger UI |
+| Endpoint    | Method | Description                                         |
+| ----------- | ------ | --------------------------------------------------- |
+| /api/health | GET    | Gets the health information of the microservice     |
+| /api/login  | POST   | Logs a user into the system                         |
+| /api/docs   | GET    | Gets the API documentation rendered with Swagger UI |
 
 For more information about the endpoints, go to the [API documentation](https://microservice-boilerplate.herokuapp.com/docs).
 

@@ -1,5 +1,5 @@
 paths:
-  /api/auth/login:
+  /api/login:
     post:
       summary: Logs a user into the system
       tags:
@@ -23,7 +23,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/responses/error'
+
+  /api/logout:
+    post:
+      summary: Logs out a user
+      tags:
+        - logout
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+        401:
+          description: No credentials provided or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/error'
+
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
     Login:
       type: object
@@ -73,4 +97,4 @@ components:
         message:
           type: string
           description: The description of the error
-          example: Incorrect username or password
+          example: Authorization header not found

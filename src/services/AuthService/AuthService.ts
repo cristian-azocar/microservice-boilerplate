@@ -19,7 +19,7 @@ export default class AuthService {
       throw new UnauthorizedError('Incorrect username or password');
     }
 
-    const payload: object = { username: user.username };
+    const payload: Record<string, unknown> = { username: user.username };
     const token: string = this.createToken(payload);
 
     return {
@@ -31,11 +31,15 @@ export default class AuthService {
     };
   }
 
-  createToken(payload: string | object | Buffer): string {
+  async logout(): Promise<void> {
+    // TODO: logout user
+  }
+
+  createToken(payload: string | Record<string, unknown> | Buffer): string {
     return jwt.sign(payload, this.secret, this.options);
   }
 
-  decodeToken(token: string): string | object {
+  decodeToken(token: string): string | Record<string, unknown> {
     return jwt.verify(token, this.secret);
   }
 }
