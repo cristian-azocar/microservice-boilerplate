@@ -31,7 +31,8 @@ export default class AuthMiddleware {
     try {
       this.authService.decodeToken(authorizationParts[1]);
     } catch (e) {
-      throw new UnauthorizedError(e.message);
+      const message = e instanceof Error ? e.message : 'Unknown error';
+      throw new UnauthorizedError(message);
     }
 
     await next();
