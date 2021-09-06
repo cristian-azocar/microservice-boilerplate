@@ -9,7 +9,7 @@
     "build": "tsc",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:integration": "jest -c tests/integration/jest.config.js",
+    "test:e2e": "jest --roots=\"<rootDir>/e2e\"",
     "lint": "eslint \"**/*.{js,ts}\"",
     "lint:fix": "eslint --fix \"**/*.{js,ts}\"",
     "docker:build": "docker build -t microservice-boilerplate .",

@@ -1,7 +1,7 @@
 import User from '../../models/User';
 
 export default class UserService {
-  fakeUsers: User[] = [
+  private fakeUsers: User[] = [
     {
       id: 1,
       username: 'admin',

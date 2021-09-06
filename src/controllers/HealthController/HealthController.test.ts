@@ -5,6 +5,7 @@ import HealthService from '../../services/HealthService';
 
 jest.mock('../../services/HealthService');
 
+const mockHealthInfo = { service: 'Microservice' };
 const req = getMockReq();
 const { res } = getMockRes();
 const mockedService = mocked(HealthService, true);
@@ -14,20 +15,17 @@ describe('Test HealthController', (): void => {
     jest.clearAllMocks();
   });
 
-  test('calls the health service', async (): Promise<void> => {
+  test('adds the health info to the response payload', async () => {
     const healthController = new HealthController();
     const serviceInstance = mockedService.mock.instances[0];
 
-    await healthController.getHealthInfo(req, res);
-
-    expect(serviceInstance.getHealthInfo).toHaveBeenCalledTimes(1);
-  });
-
-  test('sends a JSON response', async (): Promise<void> => {
-    const healthController = new HealthController();
+    serviceInstance.getHealthInfo = jest
+      .fn()
+      .mockImplementationOnce(() => mockHealthInfo);
 
     await healthController.getHealthInfo(req, res);
 
     expect(res.json).toHaveBeenCalledTimes(1);
+    expect(res.json).toHaveBeenCalledWith(mockHealthInfo);
   });
 });
