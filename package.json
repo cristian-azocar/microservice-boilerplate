@@ -14,8 +14,7 @@
     "lint:fix": "eslint --fix \"**/*.{js,ts}\"",
     "docker:build": "docker build -t microservice-boilerplate .",
     "docker:run": "docker run -d -p 3000:3000 --name microservice-boilerplate microservice-boilerplate",
-    "postdocker:build": "docker image prune -f --filter label=stage=intermediate",
-    "prepare": "husky install"
+    "postdocker:build": "docker image prune -f --filter label=stage=intermediate"
   },
   "keywords": [],
   "author": "",
