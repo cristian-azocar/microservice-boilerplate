@@ -7,10 +7,6 @@
   "execMap": {
     "ts": "node --require ts-node/register"
   },
-  "watch": [
-    "src/",
-    "settings/",
-    "docs/"
-  ],
+  "watch": ["src/"],
   "ext": "ts, yml"
 }

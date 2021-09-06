@@ -1,14 +1,20 @@
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-import logger from 'koa-logger';
-import cors from '@koa/cors';
-import routes from 'src/routes';
+import express from 'express';
+import 'express-async-errors';
+import cors, { CorsOptions } from 'cors';
+import morgan from 'morgan';
+import routes from './routes';
+import ErrorHandlerMiddleware from './middlewares/ErrorHandlerMiddleware';
 
-const app: Koa = new Koa();
+const app: express.Application = express();
+const errorHandler: ErrorHandlerMiddleware = new ErrorHandlerMiddleware();
+const corsOptions: CorsOptions = {
+  origin: process.env.CORS_WHITELIST?.split(','),
+};
 
-app.use(logger());
-app.use(bodyParser());
-app.use(cors());
-app.use(routes);
+app.use(morgan('combined'));
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use('/api', routes);
+app.use(errorHandler.handleErrors);
 
 export default app;

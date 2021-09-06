@@ -1,0 +1,100 @@
+paths:
+  /api/login:
+    post:
+      summary: Logs a user into the system
+      tags:
+        - login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/Login'
+        401:
+          description: Username and/or password incorrect
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/error'
+
+  /api/logout:
+    post:
+      summary: Logs out a user
+      tags:
+        - logout
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: OK
+        401:
+          description: No credentials provided or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/error'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The user name for login
+          example: john.doe
+        password:
+          type: string
+          description: The password for login, in plain text
+          example: secretpassword
+      required:
+        - username
+        - password
+
+  responses:
+    Login:
+      properties:
+        username:
+          type: string
+          description: The user name
+          example: john.doe
+        name:
+          type: string
+          description: The name of the user
+          example: John
+        email:
+          type: string
+          description: The e-mail of the user
+          example: john.doe@fake.com
+        creationDate:
+          type: string
+          description: The date the account was created
+          example: '2020-04-23T17:59:52.446Z'
+        token:
+          type: string
+          description: The token to access protected resources
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTkyMzE3MDkwLCJleHAiOjE1OTI0MDM0OTB9.hTMco5LgMQlB6MOGfHoMxDir2v8kmELBNoIeOWpR0Rc
+
+    error:
+      properties:
+        code:
+          type: integer
+          description: The code of the error
+          example: 401
+        message:
+          type: string
+          description: The description of the error
+          example: Authorization header not found

@@ -1,7 +1,7 @@
 node_modules
 coverage
 dist
-settings/local.yml
 TODO.txt
 .DS_Store
 .env*
+.eslintcache

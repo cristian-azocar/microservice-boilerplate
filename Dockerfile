@@ -15,7 +15,5 @@ RUN npm run build
 FROM base AS production
 ENV NODE_ENV=production
 RUN npm ci --production
-COPY --from=builder /usr/src/app/settings ./settings
-COPY --from=builder /usr/src/app/docs ./docs
-COPY --from=builder /usr/src/app/dist/src ./src
+COPY --from=builder /usr/src/app/dist ./src
 CMD ["node", "src/server.js"]

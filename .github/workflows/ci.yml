@@ -30,7 +30,7 @@ jobs:
         run: docker run -d -p 3000:3000 -e JWT_SECRET microservice-boilerplate
         env:
           JWT_SECRET: SECRET_PASSWORD
-      - name: Run integration tests
-        run: npm run test:integration
+      - name: Run end-to-end tests
+        run: npm run test:e2e
         env:
           APP_URL: http://localhost:3000
