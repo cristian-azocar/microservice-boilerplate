@@ -1,6 +1,6 @@
 import supertest, { Response, SuperTest, Test } from 'supertest';
 
-describe('HealthRouter', (): void => {
+describe('Health', (): void => {
   const server: SuperTest<Test> = supertest(process.env.APP_URL);
 
   test('returns the health of the service', async (): Promise<void> => {

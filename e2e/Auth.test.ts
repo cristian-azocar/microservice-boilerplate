@@ -1,6 +1,6 @@
 import supertest, { Response, SuperTest, Test } from 'supertest';
 
-describe('AuthRouter', (): void => {
+describe('Auth', (): void => {
   const server: SuperTest<Test> = supertest(process.env.APP_URL);
 
   it('should log in a user in the system', async (): Promise<void> => {
