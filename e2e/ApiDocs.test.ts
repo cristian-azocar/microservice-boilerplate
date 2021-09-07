@@ -1,6 +1,6 @@
 import supertest, { Response, SuperTest, Test } from 'supertest';
 
-describe('ApiDocsRouter', (): void => {
+describe('ApiDocs', (): void => {
   const server: SuperTest<Test> = supertest(process.env.APP_URL);
 
   it('should return the docs web page', async (): Promise<void> => {
